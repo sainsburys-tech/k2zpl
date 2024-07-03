@@ -1,7 +1,6 @@
 class ZplBuilder {
     private val commands = mutableListOf<ZplCommand>()
     private var _dpiSetting: DpiSetting = DpiSetting.Unset  // Default DPI value
-    private var currentY: Int = 0
     private var defaultFont: DefaultFont = DefaultFont()
 
     var dpiSetting: DpiSetting
@@ -15,12 +14,12 @@ class ZplBuilder {
             _dpiSetting = value
         }
 
-    fun command(command: ZplCommand) {
+    fun addCommand(command: ZplCommand) {
         commands.add(command)
     }
 
-    fun command(commandString: String) {
-        command(ZplCommand.CustomCommand(commandString))
+    fun addCommand(commandString: String) {
+        addCommand(ZplCommand.CustomCommand(commandString))
     }
 
     fun build(): String {
@@ -84,32 +83,23 @@ class ZplBuilder {
     }
 
     /**
-     * Adds a field with specified font and size, and updates the current vertical position.
+     * Adds a field with specified font and size.
      */
-    fun field(x: Int = 0, font: ZplFont, fontHeight: Int, fontWidth: Int, data: String, spacing: Int = 4.mm) {
-        fieldOrigin(x, currentY)
+    fun addField(x: Int, y: Int, font: ZplFont, fontHeight: Int, fontWidth: Int, data: String) {
+        fieldOrigin(x, y)
         font(font, fontHeight, fontWidth)
         fieldData(data)
         fieldSeparator()
-        currentY += fontHeight + spacing
     }
 
     /**
-     * Adds a field with the default font, and updates the current vertical position.
+     * Adds a field with the default font.
      */
-    fun field(x: Int = 0, data: String, spacing: Int = 4.mm) {
-        fieldOrigin(x, currentY)
+    fun addField(x: Int = 0, y: Int = 0, data: String) {
+        fieldOrigin(x, y)
         font(defaultFont.font, defaultFont.fontHeight, defaultFont.fontWidth)
         fieldData(data)
         fieldSeparator()
-        currentY += defaultFont.fontHeight + spacing
-    }
-
-    /**
-     * Sets the initial vertical position.
-     */
-    fun setInitialVerticalPosition(y: Int) {
-        currentY = y
     }
 }
 
