@@ -2,6 +2,7 @@ class ZplBuilder {
     private val commands = mutableListOf<ZplCommand>()
     private var _dpiSetting: DpiSetting = DpiSetting.Unset  // Default DPI value
     private var currentY: Int = 0
+    private var defaultFont: DefaultFont = DefaultFont()
 
     var dpiSetting: DpiSetting
         get() {
@@ -14,15 +15,21 @@ class ZplBuilder {
             _dpiSetting = value
         }
 
-    fun addCommand(command: ZplCommand) {
+    fun command(command: ZplCommand) {
         commands.add(command)
     }
 
+    fun command(commandString: String) {
+        command(ZplCommand.CustomCommand(commandString))
+    }
+
     fun build(): String {
-        return commands.joinToString("\n") { command ->
+        val stringBuilder = StringBuilder()
+        for (command in commands) {
             val params = command.parameters.values.joinToString(",") { it.toString() }
-            "${command.command}$params"
+            stringBuilder.append(command.command).append(params).append('\n')
         }
+        return stringBuilder.toString()
     }
 
     /**
@@ -66,25 +73,51 @@ class ZplBuilder {
      * Extension property to return Int value in dots.
      */
     val Int.dots: Int
-        get() {
-            if (dpiSetting == DpiSetting.Unset) {
-                throw IllegalStateException("DPI is not set")
-            }
-            return this
-        }
+        get() = this
 
     /**
-     * Adds a field and updates the current vertical position.
+     * Sets the default font and font size.
      */
-    fun addField(x: Int, font: ZplFont, fontHeight: Int, fontWidth: Int, data: String, spacing: Int = 4.mm) {
+    fun setDefaultFont(font: ZplFont = ZplFont.A, fontHeight: Int = 30, fontWidth: Int = 30) {
+        defaultFont = DefaultFont(font, fontHeight, fontWidth)
+        font(font, fontHeight, fontWidth) // Set the default font immediately
+    }
+
+    /**
+     * Adds a field with specified font and size, and updates the current vertical position.
+     */
+    fun field(x: Int = 0, font: ZplFont, fontHeight: Int, fontWidth: Int, data: String, spacing: Int = 4.mm) {
         fieldOrigin(x, currentY)
         font(font, fontHeight, fontWidth)
         fieldData(data)
         fieldSeparator()
         currentY += fontHeight + spacing
     }
+
+    /**
+     * Adds a field with the default font, and updates the current vertical position.
+     */
+    fun field(x: Int = 0, data: String, spacing: Int = 4.mm) {
+        fieldOrigin(x, currentY)
+        font(defaultFont.font, defaultFont.fontHeight, defaultFont.fontWidth)
+        fieldData(data)
+        fieldSeparator()
+        currentY += defaultFont.fontHeight + spacing
+    }
+
+    /**
+     * Sets the initial vertical position.
+     */
+    fun setInitialVerticalPosition(y: Int) {
+        currentY = y
+    }
 }
 
+data class DefaultFont(
+    val font: ZplFont = ZplFont.A,
+    val fontHeight: Int = 30,
+    val fontWidth: Int = 30
+)
 
 enum class DpiSetting(val dpi: Int, val dotsPerMm: Double) {
     Unset(-1, -1.0),
@@ -101,11 +134,14 @@ enum class DpiSetting(val dpi: Int, val dotsPerMm: Double) {
     }
 }
 
+fun zpl(init: ZplBuilder.() -> Unit) = ZplBuilder().apply {
+    init()
+}.build()
 
-fun zplScript(init: ZplBuilder.() -> Unit): String {
-    val builder = ZplBuilder()
-    builder.init()
-    return builder.build()
+fun label(init: ZplBuilder.() -> Unit) = ZplBuilder().apply {
+    startFormat()
+    init()
+    endFormat()
 }
 
 

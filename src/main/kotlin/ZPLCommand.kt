@@ -242,6 +242,10 @@ sealed class ZplCommand {
         override val command: String = "^XZ"
         override val parameters: Map<String, Any?> = emptyMap()
     }
+
+    data class CustomCommand(override val command: String) : ZplCommand() {
+        override val parameters: Map<String, Any?> = emptyMap()
+    }
 }
 
 enum class ZplFieldOrientation(val code: Char) {
