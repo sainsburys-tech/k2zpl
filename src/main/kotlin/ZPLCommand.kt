@@ -246,6 +246,26 @@ sealed class ZplCommand {
     data class CustomCommand(override val command: String) : ZplCommand() {
         override val parameters: Map<String, Any?> = emptyMap()
     }
+
+    data class MediaModeCommand(val mediaMode: ZplMediaMode, val preprintedLabelHandling: ZplPreprintedLabelHandling) : ZplCommand() {
+        override val command: String = "^MM"
+        override val parameters: Map<String, Any?> =
+            mapOf("mode" to mediaMode.value, "preprinted" to preprintedLabelHandling.value)
+    }
+}
+
+enum class ZplMediaMode(val value: Char) {
+    TEAR_OFF('T'),
+    PEEL_OFF('P'),
+    REWIND('R'),
+    APPLICATOR('A'),
+    CUTTER('C'),
+    DELAYED_CUT('D')
+}
+
+enum class ZplPreprintedLabelHandling(val value: Char) {
+    NORMAL('N'),
+    PREPRINTED('Y')
 }
 
 enum class ZplFieldOrientation(val code: Char) {
