@@ -1,6 +1,8 @@
-package command.options
+@file:Suppress("UNUSED")
 
-enum class DpiSetting(val dpi: Int, val dotsPerMm: Double) {
+package info.mking.k2zpl.command.options
+
+enum class ZplDpiSetting(val dpi: Int, val dotsPerMm: Double) {
     Unset(-1, -1.0),
     DPI_152(152, 6.0),
     DPI_203(203, 8.0),
@@ -8,7 +10,7 @@ enum class DpiSetting(val dpi: Int, val dotsPerMm: Double) {
     DPI_608(608, 24.0);
 
     companion object {
-        fun fromDpi(dpi: Int): DpiSetting {
+        fun fromDpi(dpi: Int): ZplDpiSetting {
             return entries.find { it.dpi == dpi }
                 ?: throw IllegalArgumentException("Unsupported DPI value: $dpi")
         }
