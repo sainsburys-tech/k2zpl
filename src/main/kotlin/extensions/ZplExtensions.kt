@@ -1,9 +1,48 @@
+package extensions
+
+import ZplBuilder
+import command.BarcodeFieldDefault
+import command.ChangeAlphanumericFont
+import command.Code128Barcode
+import command.Code39Barcode
+import command.EndFormat
+import command.FieldBlock
+import command.FieldData
+import command.FieldOrientation
+import command.FieldOrigin
+import command.FieldSeparator
+import command.Font
+import command.FontAt
+import command.GraphicBox
+import command.GraphicCircle
+import command.GraphicDiagonalLine
+import command.GraphicEllipse
+import command.GraphicField
+import command.LabelHome
+import command.LabelLength
+import command.LabelShift
+import command.MediaDarkness
+import command.MediaMode
+import command.PrintQuantity
+import command.PrintRate
+import command.PrintWidth
+import command.StartFormat
+import command.ZplCommand
+import command.options.ZplDiagonalOrientation
+import command.options.ZplFieldOrientation
+import command.options.ZplFont
+import command.options.ZplLineColor
+import command.options.ZplMediaMode
+import command.options.ZplPreprintedLabelHandling
+import command.options.ZplPrintSpeed
+import command.options.ZplTextAlignment
+
 /**
  * Sets the print width of the label.
  * @param width The width of the label.
  */
 fun ZplBuilder.printWidth(width: Int) {
-    command(ZplCommand.PrintWidth(width))
+    command(PrintWidth(width))
 }
 
 /**
@@ -12,7 +51,7 @@ fun ZplBuilder.printWidth(width: Int) {
  * @param y The y-coordinate of the label home.
  */
 fun ZplBuilder.labelHome(x: Int, y: Int) {
-    command(ZplCommand.LabelHome(x, y))
+    command(LabelHome(x, y))
 }
 
 /**
@@ -20,7 +59,7 @@ fun ZplBuilder.labelHome(x: Int, y: Int) {
  * @param shift The shift amount.
  */
 fun ZplBuilder.labelShift(shift: Int) {
-    command(ZplCommand.LabelShift(shift))
+    command(LabelShift(shift))
 }
 
 /**
@@ -30,7 +69,7 @@ fun ZplBuilder.labelShift(shift: Int) {
  * @param width The width of the font.
  */
 fun ZplBuilder.font(font: ZplFont, height: Int, width: Int) {
-    command(ZplCommand.Font(font, height, width))
+    command(Font(font, height, width))
 }
 
 /**
@@ -41,7 +80,7 @@ fun ZplBuilder.font(font: ZplFont, height: Int, width: Int) {
  * @param path The path to the font file.
  */
 fun ZplBuilder.fontAt(orientation: ZplFieldOrientation, height: Int, width: Int, path: String) {
-    command(ZplCommand.FontAt(orientation, height, width, path))
+    command(FontAt(orientation, height, width, path))
 }
 
 /**
@@ -53,7 +92,7 @@ fun ZplBuilder.fontAt(orientation: ZplFieldOrientation, height: Int, width: Int,
  * @param hangingIndent The hanging indent for the block.
  */
 fun ZplBuilder.fieldBlock(width: Int, lines: Int, lineSpacing: Int, alignment: ZplTextAlignment, hangingIndent: Int) {
-    command(ZplCommand.FieldBlock(width, lines, lineSpacing, alignment, hangingIndent))
+    command(FieldBlock(width, lines, lineSpacing, alignment, hangingIndent))
 }
 
 /**
@@ -66,8 +105,16 @@ fun ZplBuilder.fieldBlock(width: Int, lines: Int, lineSpacing: Int, alignment: Z
  * @param symbols The number of symbols.
  * @param id The identifier for the barcode.
  */
-fun ZplBuilder.code128Barcode(orientation: ZplFieldOrientation, magnification: Int, eci: Int, size: Int, readerInit: Char, symbols: Int, id: Int) {
-    command(ZplCommand.Code128Barcode(orientation, magnification, eci, size, readerInit, symbols, id))
+fun ZplBuilder.code128Barcode(
+    orientation: ZplFieldOrientation,
+    magnification: Int,
+    eci: Int,
+    size: Int,
+    readerInit: Char,
+    symbols: Int,
+    id: Int
+) {
+    command(Code128Barcode(orientation, magnification, eci, size, readerInit, symbols, id))
 }
 
 /**
@@ -78,8 +125,14 @@ fun ZplBuilder.code128Barcode(orientation: ZplFieldOrientation, magnification: I
  * @param line The line thickness of the barcode.
  * @param lineAbove Whether to include a line above the barcode.
  */
-fun ZplBuilder.code39Barcode(orientation: ZplFieldOrientation, checkDigit: Boolean, height: Int, line: Int, lineAbove: Boolean) {
-    command(ZplCommand.Code39Barcode(orientation, checkDigit, height, line, lineAbove))
+fun ZplBuilder.code39Barcode(
+    orientation: ZplFieldOrientation,
+    checkDigit: Boolean,
+    height: Int,
+    line: Int,
+    lineAbove: Boolean
+) {
+    command(Code39Barcode(orientation, checkDigit, height, line, lineAbove))
 }
 
 /**
@@ -89,7 +142,7 @@ fun ZplBuilder.code39Barcode(orientation: ZplFieldOrientation, checkDigit: Boole
  * @param height The height of the barcode field.
  */
 fun ZplBuilder.defaultBarcodeField(width: Int, widthRatio: Int, height: Int) {
-    command(ZplCommand.BarcodeFieldDefault(width, widthRatio, height))
+    command(BarcodeFieldDefault(width, widthRatio, height))
 }
 
 /**
@@ -97,7 +150,7 @@ fun ZplBuilder.defaultBarcodeField(width: Int, widthRatio: Int, height: Int) {
  * @param orientation The orientation of the field.
  */
 fun ZplBuilder.defaultFieldOrientation(orientation: ZplFieldOrientation) {
-    command(ZplCommand.FieldOrientation(orientation))
+    command(FieldOrientation(orientation))
 }
 
 /**
@@ -107,7 +160,7 @@ fun ZplBuilder.defaultFieldOrientation(orientation: ZplFieldOrientation) {
  * @param width The width of the font.
  */
 fun ZplBuilder.defaultAlphanumericFont(font: ZplFont, height: Int, width: Int) {
-    command(ZplCommand.ChangeAlphanumericFont(font, height, width))
+    command(ChangeAlphanumericFont(font, height, width))
 }
 
 /**
@@ -116,7 +169,7 @@ fun ZplBuilder.defaultAlphanumericFont(font: ZplFont, height: Int, width: Int) {
  * @param darkness The print darkness.
  */
 fun ZplBuilder.defaultPrintRate(speed: ZplPrintSpeed, darkness: Int) {
-    command(ZplCommand.PrintRate(speed, darkness))
+    command(PrintRate(speed, darkness))
 }
 
 /**
@@ -124,7 +177,7 @@ fun ZplBuilder.defaultPrintRate(speed: ZplPrintSpeed, darkness: Int) {
  * @param darkness The darkness level.
  */
 fun ZplBuilder.defaultMediaDarkness(darkness: Int) {
-    command(ZplCommand.MediaDarkness(darkness))
+    command(MediaDarkness(darkness))
 }
 
 /**
@@ -134,7 +187,7 @@ fun ZplBuilder.defaultMediaDarkness(darkness: Int) {
  * @param alignment The alignment of the field (optional).
  */
 fun ZplBuilder.fieldOrigin(x: Int, y: Int, alignment: ZplFieldOrientation? = null) {
-    command(ZplCommand.FieldOrigin(x, y, alignment))
+    command(FieldOrigin(x, y, alignment))
 }
 
 /**
@@ -146,7 +199,7 @@ fun ZplBuilder.fieldOrigin(x: Int, y: Int, alignment: ZplFieldOrientation? = nul
  * @param rounding The corner rounding of the box (optional).
  */
 fun ZplBuilder.graphicBox(width: Int, height: Int, thickness: Int, color: ZplLineColor? = null, rounding: Int? = null) {
-    command(ZplCommand.GraphicBox(width, height, thickness, color, rounding))
+    command(GraphicBox(width, height, thickness, color, rounding))
 }
 
 /**
@@ -156,7 +209,7 @@ fun ZplBuilder.graphicBox(width: Int, height: Int, thickness: Int, color: ZplLin
  * @param color The color of the circle border (optional).
  */
 fun ZplBuilder.graphicCircle(diameter: Int, thickness: Int, color: ZplLineColor? = null) {
-    command(ZplCommand.GraphicCircle(diameter, thickness, color))
+    command(GraphicCircle(diameter, thickness, color))
 }
 
 /**
@@ -167,8 +220,14 @@ fun ZplBuilder.graphicCircle(diameter: Int, thickness: Int, color: ZplLineColor?
  * @param color The color of the line (optional).
  * @param orientation The orientation of the line (optional).
  */
-fun ZplBuilder.graphicDiagonalLine(width: Int, height: Int, thickness: Int, color: ZplLineColor? = null, orientation: ZplDiagonalOrientation? = null) {
-    command(ZplCommand.GraphicDiagonalLine(width, height, thickness, color, orientation))
+fun ZplBuilder.graphicDiagonalLine(
+    width: Int,
+    height: Int,
+    thickness: Int,
+    color: ZplLineColor? = null,
+    orientation: ZplDiagonalOrientation? = null
+) {
+    command(GraphicDiagonalLine(width, height, thickness, color, orientation))
 }
 
 /**
@@ -179,7 +238,7 @@ fun ZplBuilder.graphicDiagonalLine(width: Int, height: Int, thickness: Int, colo
  * @param color The color of the ellipse border (optional).
  */
 fun ZplBuilder.graphicEllipse(width: Int, height: Int, thickness: Int, color: ZplLineColor? = null) {
-    command(ZplCommand.GraphicEllipse(width, height, thickness, color))
+    command(GraphicEllipse(width, height, thickness, color))
 }
 
 /**
@@ -191,14 +250,14 @@ fun ZplBuilder.graphicEllipse(width: Int, height: Int, thickness: Int, color: Zp
  * @param data The data for the graphic field.
  */
 fun ZplBuilder.graphicField(format: Char, dataBytes: Int, totalBytes: Int, rowBytes: Int, data: String) {
-    command(ZplCommand.GraphicField(format, dataBytes, totalBytes, rowBytes, data))
+    command(GraphicField(format, dataBytes, totalBytes, rowBytes, data))
 }
 
 /**
  * Adds a field separator.
  */
 fun ZplBuilder.fieldSeparator() {
-    command(ZplCommand.FieldSeparator)
+    command(FieldSeparator)
 }
 
 /**
@@ -206,7 +265,7 @@ fun ZplBuilder.fieldSeparator() {
  * @param data The data to be added to the field.
  */
 fun ZplBuilder.fieldData(data: String) {
-    command(ZplCommand.FieldData(data))
+    command(FieldData(data))
 }
 
 /**
@@ -217,8 +276,14 @@ fun ZplBuilder.fieldData(data: String) {
  * @param noPause Whether to pause the printer (optional).
  * @param cutOnError Whether to cut on error (optional).
  */
-fun ZplBuilder.printQuantity(quantity: Int, labelsBetweenPauses: Int? = null, replicates: Int? = null, noPause: Boolean = false, cutOnError: Boolean = false) {
-    command(ZplCommand.PrintQuantity(quantity, labelsBetweenPauses, replicates, noPause, cutOnError))
+fun ZplBuilder.printQuantity(
+    quantity: Int,
+    labelsBetweenPauses: Int? = null,
+    replicates: Int? = null,
+    noPause: Boolean = false,
+    cutOnError: Boolean = false
+) {
+    command(PrintQuantity(quantity, labelsBetweenPauses, replicates, noPause, cutOnError))
 }
 
 /**
@@ -226,28 +291,31 @@ fun ZplBuilder.printQuantity(quantity: Int, labelsBetweenPauses: Int? = null, re
  * @param length The length of the label.
  */
 fun ZplBuilder.labelLength(length: Int) {
-    command(ZplCommand.LabelLength(length))
+    command(LabelLength(length))
 }
 
 /**
  * Starts the label format.
  */
 fun ZplBuilder.startFormat() {
-    command(ZplCommand.StartFormat)
+    command(StartFormat)
 }
 
 /**
  * Ends the label format.
  */
 fun ZplBuilder.endFormat() {
-    command(ZplCommand.EndFormat)
+    command(EndFormat)
 }
 
 /**
  * Sets Media Mode
  */
-fun ZplBuilder.mediaMode(zplMediaMode: ZplMediaMode, labelHandling: ZplPreprintedLabelHandling = ZplPreprintedLabelHandling.NORMAL) {
-    command(ZplCommand.MediaModeCommand(zplMediaMode, labelHandling))
+fun ZplBuilder.mediaMode(
+    zplMediaMode: ZplMediaMode,
+    labelHandling: ZplPreprintedLabelHandling = ZplPreprintedLabelHandling.NORMAL
+) {
+    command(MediaMode(zplMediaMode, labelHandling))
 }
 
 /**

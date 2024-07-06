@@ -1,3 +1,14 @@
+import command.CustomCommand
+import command.ZplCommand
+import command.options.DpiSetting
+import command.options.ZplFont
+import extensions.endFormat
+import extensions.fieldData
+import extensions.fieldOrigin
+import extensions.fieldSeparator
+import extensions.font
+import extensions.startFormat
+
 class ZplBuilder {
     private val commands = mutableListOf<ZplCommand>()
     private var _dpiSetting: DpiSetting = DpiSetting.Unset  // Default DPI value
@@ -19,7 +30,7 @@ class ZplBuilder {
     }
 
     fun addCommand(commandString: String) {
-        addCommand(ZplCommand.CustomCommand(commandString))
+        addCommand(CustomCommand(commandString))
     }
 
     fun build(): String {
@@ -108,21 +119,6 @@ data class DefaultFont(
     val fontHeight: Int = 30,
     val fontWidth: Int = 30
 )
-
-enum class DpiSetting(val dpi: Int, val dotsPerMm: Double) {
-    Unset(-1, -1.0),
-    DPI_152(152, 6.0),
-    DPI_203(203, 8.0),
-    DPI_300(300, 11.8),
-    DPI_608(608, 24.0);
-
-    companion object {
-        fun fromDpi(dpi: Int): DpiSetting {
-            return entries.find { it.dpi == dpi }
-                ?: throw IllegalArgumentException("Unsupported DPI value: $dpi")
-        }
-    }
-}
 
 fun zpl(init: ZplBuilder.() -> Unit) = ZplBuilder().apply {
     init()
