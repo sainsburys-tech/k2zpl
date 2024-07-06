@@ -1,8 +1,7 @@
 @file:Suppress("UNUSED")
 
-package info.mking.k2zpl.extensions
+package info.mking.k2zpl.builder
 
-import info.mking.k2zpl.ZplBuilder
 import info.mking.k2zpl.command.BarcodeFieldDefault
 import info.mking.k2zpl.command.ChangeAlphanumericFont
 import info.mking.k2zpl.command.Code128Barcode

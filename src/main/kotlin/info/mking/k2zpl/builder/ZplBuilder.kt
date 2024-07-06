@@ -1,32 +1,27 @@
 @file:Suppress("UNUSED")
 
-package info.mking.k2zpl
+package info.mking.k2zpl.builder
 
 import info.mking.k2zpl.command.CustomCommand
+import info.mking.k2zpl.command.Font
 import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.options.ZplDpiSetting
 import info.mking.k2zpl.command.options.ZplFont
-import info.mking.k2zpl.extensions.endFormat
-import info.mking.k2zpl.extensions.fieldData
-import info.mking.k2zpl.extensions.fieldOrigin
-import info.mking.k2zpl.extensions.fieldSeparator
-import info.mking.k2zpl.extensions.font
-import info.mking.k2zpl.extensions.startFormat
 
 class ZplBuilder {
     private val commands = mutableListOf<ZplCommand>()
-    private var _Zpl_dpiSetting: ZplDpiSetting = ZplDpiSetting.Unset  // Default DPI value
-    private var defaultFont: DefaultFont = DefaultFont()
+    private var _zplDpiSetting: ZplDpiSetting = ZplDpiSetting.Unset
+    private var defaultFont: Font = Font(ZplFont.A, 30.dots, 30.dots)
 
     var zplDpiSetting: ZplDpiSetting
         get() {
-            if (_Zpl_dpiSetting == ZplDpiSetting.Unset) {
+            if (_zplDpiSetting == ZplDpiSetting.Unset) {
                 throw IllegalStateException("DPI is not set")
             }
-            return _Zpl_dpiSetting
+            return _zplDpiSetting
         }
         set(value) {
-            _Zpl_dpiSetting = value
+            _zplDpiSetting = value
         }
 
     fun addCommand(command: ZplCommand) {
@@ -51,9 +46,7 @@ class ZplBuilder {
      */
     val Int.cm: Int
         get() {
-            if (zplDpiSetting == ZplDpiSetting.Unset) {
-                throw IllegalStateException("DPI is not set")
-            }
+            requireZplDpiSetting()
             val cm = this.toDouble()
             return (cm * 10 * zplDpiSetting.dotsPerMm).toInt()
         }
@@ -63,9 +56,7 @@ class ZplBuilder {
      */
     val Int.inches: Int
         get() {
-            if (zplDpiSetting == ZplDpiSetting.Unset) {
-                throw IllegalStateException("DPI is not set")
-            }
+            requireZplDpiSetting()
             val inches = this.toDouble()
             val dotsPerInch = zplDpiSetting.dpi
             return (inches * dotsPerInch).toInt()
@@ -76,9 +67,7 @@ class ZplBuilder {
      */
     val Int.mm: Int
         get() {
-            if (zplDpiSetting == ZplDpiSetting.Unset) {
-                throw IllegalStateException("DPI is not set")
-            }
+            requireZplDpiSetting()
             val mm = this.toDouble()
             return (mm * zplDpiSetting.dotsPerMm).toInt()
         }
@@ -93,7 +82,7 @@ class ZplBuilder {
      * Sets the default font and font size.
      */
     fun setDefaultFont(font: ZplFont = ZplFont.A, fontHeight: Int = 30, fontWidth: Int = 30) {
-        defaultFont = DefaultFont(font, fontHeight, fontWidth)
+        defaultFont = Font(font, fontHeight, fontWidth)
         font(font, fontHeight, fontWidth) // Set the default font immediately
     }
 
@@ -112,26 +101,18 @@ class ZplBuilder {
      */
     fun addField(x: Int = 0, y: Int = 0, data: String) {
         fieldOrigin(x, y)
-        font(defaultFont.font, defaultFont.fontHeight, defaultFont.fontWidth)
+        font(defaultFont.font, defaultFont.height, defaultFont.width)
         fieldData(data)
         fieldSeparator()
     }
+
+    /**
+     * Enforce DPI setting to be anything but [ZplDpiSetting.Unset]
+     * @throws IllegalStateException
+     */
+    private fun requireZplDpiSetting() {
+        if (zplDpiSetting == ZplDpiSetting.Unset) {
+            throw IllegalStateException("DPI is not set")
+        }
+    }
 }
-
-data class DefaultFont(
-    val font: ZplFont = ZplFont.A,
-    val fontHeight: Int = 30,
-    val fontWidth: Int = 30
-)
-
-fun zpl(init: ZplBuilder.() -> Unit) = ZplBuilder().apply {
-    init()
-}.build()
-
-fun label(init: ZplBuilder.() -> Unit) = ZplBuilder().apply {
-    startFormat()
-    init()
-    endFormat()
-}
-
-

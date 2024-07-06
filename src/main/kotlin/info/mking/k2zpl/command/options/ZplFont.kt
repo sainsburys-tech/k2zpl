@@ -11,5 +11,5 @@ enum class ZplFont(val code: Char) {
     F('F'),
     G('G'),
     H('H'),
-    GS('0') // Graphic Symbol font
+    GS('0'); // Graphic Symbol font
 }
