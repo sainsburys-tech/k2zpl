@@ -7,13 +7,14 @@ import info.mking.k2zpl.command.Font
 import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.options.ZplDpiSetting
 import info.mking.k2zpl.command.options.ZplFont
+import kotlin.math.roundToInt
 
 class ZplBuilder {
     private val commands = mutableListOf<ZplCommand>()
     private var _zplDpiSetting: ZplDpiSetting = ZplDpiSetting.Unset
     private var defaultFont: Font = Font(ZplFont.A, 30.dots, 30.dots)
 
-    var zplDpiSetting: ZplDpiSetting
+    var dpiSetting: ZplDpiSetting
         get() {
             if (_zplDpiSetting == ZplDpiSetting.Unset) {
                 throw IllegalStateException("DPI is not set")
@@ -47,8 +48,7 @@ class ZplBuilder {
     val Int.cm: Int
         get() {
             requireZplDpiSetting()
-            val cm = this.toDouble()
-            return (cm * 10 * zplDpiSetting.dotsPerMm).toInt()
+            return (toDouble() * 10 * dpiSetting.dotsPerMm).roundToInt()
         }
 
     /**
@@ -57,9 +57,7 @@ class ZplBuilder {
     val Int.inches: Int
         get() {
             requireZplDpiSetting()
-            val inches = this.toDouble()
-            val dotsPerInch = zplDpiSetting.dpi
-            return (inches * dotsPerInch).toInt()
+            return (toDouble() * dpiSetting.dpi).roundToInt()
         }
 
     /**
@@ -68,8 +66,7 @@ class ZplBuilder {
     val Int.mm: Int
         get() {
             requireZplDpiSetting()
-            val mm = this.toDouble()
-            return (mm * zplDpiSetting.dotsPerMm).toInt()
+            return (toDouble() * dpiSetting.dotsPerMm).roundToInt()
         }
 
     /**
@@ -111,7 +108,7 @@ class ZplBuilder {
      * @throws IllegalStateException
      */
     private fun requireZplDpiSetting() {
-        if (zplDpiSetting == ZplDpiSetting.Unset) {
+        if (dpiSetting == ZplDpiSetting.Unset) {
             throw IllegalStateException("DPI is not set")
         }
     }

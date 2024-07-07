@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm") version "1.9.23"
     id("maven-publish")
     id("signing")
+    id("version-catalog")
     id("com.vanniktech.maven.publish") version "0.29.0"
 }
 
@@ -16,6 +17,9 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotest.runner.junit5)
+    testImplementation(libs.kotest.assertions.core)
 }
 
 tasks.test {
