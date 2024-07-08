@@ -12,4 +12,4 @@ fun label(init: ZplBuilder.() -> Unit) = ZplBuilder().apply {
     startFormat()
     init()
     endFormat()
-}
+}.build()
