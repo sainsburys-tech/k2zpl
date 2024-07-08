@@ -33,13 +33,8 @@ class ZplBuilder {
         addCommand(CustomCommand(commandString))
     }
 
-    fun build(): String {
-        val stringBuilder = StringBuilder()
-        for (command in commands) {
-            val params = command.parameters.values.joinToString(",") { it.toString() }
-            stringBuilder.append(command.command).append(params).append('\n')
-        }
-        return stringBuilder.toString()
+    fun build() = buildString {
+        commands.forEach { it.build(this@buildString).append('\n') }
     }
 
     /**
@@ -47,7 +42,7 @@ class ZplBuilder {
      */
     val Int.cm: Int
         get() {
-            requireZplDpiSetting()
+            requireDpiSetting()
             return (toDouble() * 10 * dpiSetting.dotsPerMm).roundToInt()
         }
 
@@ -56,7 +51,7 @@ class ZplBuilder {
      */
     val Int.inches: Int
         get() {
-            requireZplDpiSetting()
+            requireDpiSetting()
             return (toDouble() * dpiSetting.dpi).roundToInt()
         }
 
@@ -65,7 +60,7 @@ class ZplBuilder {
      */
     val Int.mm: Int
         get() {
-            requireZplDpiSetting()
+            requireDpiSetting()
             return (toDouble() * dpiSetting.dotsPerMm).roundToInt()
         }
 
@@ -107,7 +102,7 @@ class ZplBuilder {
      * Enforce DPI setting to be anything but [ZplDpiSetting.Unset]
      * @throws IllegalStateException
      */
-    private fun requireZplDpiSetting() {
+    private fun requireDpiSetting() {
         if (dpiSetting == ZplDpiSetting.Unset) {
             throw IllegalStateException("DPI is not set")
         }

@@ -5,6 +5,6 @@ internal data class LabelLength(val length: Int) : ZplCommand {
         require(length in 1..32000) { "Length must be between 1 and 32000" }
     }
 
-    override val command: String = "^LL"
-    override val parameters: Map<String, Any?> = mapOf("l" to length)
+    override val command: CharSequence = "^LL"
+    override val parameters: Map<CharSequence, Any?> = mapOf("l" to length)
 }

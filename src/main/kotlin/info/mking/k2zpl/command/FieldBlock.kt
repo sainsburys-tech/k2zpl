@@ -12,8 +12,8 @@ internal data class FieldBlock(
         require(hangingIndent in 0..32000) { "Hanging indent must be between 0 and 32000" }
     }
 
-    override val command: String = "^FB"
-    override val parameters: Map<String, Any?> = mapOf(
+    override val command: CharSequence = "^FB"
+    override val parameters: Map<CharSequence, Any?> = mapOf(
         "w" to width, "l" to lines, "s" to lineSpacing, "a" to alignment.code, "h" to hangingIndent
     )
 }

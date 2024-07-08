@@ -9,7 +9,7 @@ internal data class FontAt(val orientation: ZplFieldOrientation, val height: Int
         require(width in 10..32000) { "Width must be between 10 and 32000" }
     }
 
-    override val command: String = "^A@"
-    override val parameters: Map<String, Any?> =
+    override val command: CharSequence = "^A@"
+    override val parameters: Map<CharSequence, Any?> =
         mapOf("o" to orientation.code, "h" to height, "w" to width, "p" to path)
 }

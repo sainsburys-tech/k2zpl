@@ -13,8 +13,8 @@ internal data class GraphicField(
         require(rowBytes in 1..32000) { "Row bytes must be between 1 and 32000" }
     }
 
-    override val command: String = "^GF"
-    override val parameters: Map<String, Any?> = mapOf(
+    override val command: CharSequence = "^GF"
+    override val parameters: Map<CharSequence, Any?> = mapOf(
         "f" to format, "db" to dataBytes, "tb" to totalBytes, "rb" to rowBytes, "d" to data
     )
 }

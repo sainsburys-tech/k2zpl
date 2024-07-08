@@ -8,6 +8,6 @@ internal data class PrintRate(val speed: ZplPrintSpeed, val darkness: Int) : Zpl
         require(darkness in 0..30) { "Darkness must be between 0 and 30" }
     }
 
-    override val command: String = "^PR"
-    override val parameters: Map<String, Any?> = mapOf("s" to speed.code, "d" to darkness)
+    override val command: CharSequence = "^PR"
+    override val parameters: Map<CharSequence, Any?> = mapOf("s" to speed.code, "d" to darkness)
 }

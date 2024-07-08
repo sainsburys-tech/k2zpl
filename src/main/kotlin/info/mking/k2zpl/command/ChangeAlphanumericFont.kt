@@ -8,6 +8,6 @@ internal data class ChangeAlphanumericFont(val font: ZplFont, val height: Int, v
         require(width in 10..32000) { "Width must be between 10 and 32000" }
     }
 
-    override val command: String = "^CF"
-    override val parameters: Map<String, Any?> = mapOf("f" to font.code, "h" to height, "w" to width)
+    override val command: CharSequence = "^CF"
+    override val parameters: Map<CharSequence, Any?> = mapOf("f" to font.code, "h" to height, "w" to width)
 }

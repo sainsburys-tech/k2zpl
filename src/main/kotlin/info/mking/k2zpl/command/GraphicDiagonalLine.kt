@@ -16,10 +16,10 @@ internal data class GraphicDiagonalLine(
         require(thickness in 1..32000) { "Thickness must be between 1 and 32000" }
     }
 
-    override val command: String = "^GD"
-    override val parameters: Map<String, Any?> =
-        mutableMapOf<String, Any?>("w" to width, "h" to height, "t" to thickness).apply {
-            if (color != null) this["c"] = color.code
-            if (orientation != null) this["o"] = orientation.code
-        }
+    override val command: CharSequence = "^GD"
+    override val parameters: Map<CharSequence, Any?> = buildMap {
+        putAll(mapOf("w" to width, "h" to height, "t" to thickness))
+        if (color != null) put("c", color.code)
+        if (orientation != null) put("o", orientation.code)
+    }
 }

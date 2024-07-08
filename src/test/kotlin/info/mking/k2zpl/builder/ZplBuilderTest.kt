@@ -10,29 +10,23 @@ import io.kotest.data.headers
 import io.kotest.data.row
 import io.kotest.data.table
 import io.kotest.matchers.shouldBe
-import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import kotlin.math.roundToInt
 
 class ZplBuilderTest : DescribeSpec({
 
     isolationMode = IsolationMode.InstancePerTest
-
-    val mockZplCommand: ZplCommand = mockk(relaxed = true) {
-        every { command } returns "an-command"
-    }
+    
+    val mockZplCommand: ZplCommand = mockk(relaxed = true)
 
     val subject = ZplBuilder()
 
     describe("addCommand") {
-        it("should use the passed command without parameters") {
+        it("should call build on the passed command") {
             subject.addCommand(mockZplCommand)
-            subject.build() shouldBe "an-command\n"
-        }
-        it("should use the passed command with parameters") {
-            every { mockZplCommand.parameters } returns mapOf("an" to "param")
-            subject.addCommand(mockZplCommand)
-            subject.build() shouldBe "an-commandparam\n"
+            subject.build()
+            verify { mockZplCommand.build(ofType()) }
         }
         it("should used the pass string command") {
             subject.addCommand("another-command")

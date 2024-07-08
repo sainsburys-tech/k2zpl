@@ -15,8 +15,8 @@ internal data class Code128Barcode(
         require(id in 0..9999) { "ID must be between 0 and 9999" }
     }
 
-    override val command: String = "^B0"
-    override val parameters: Map<String, Any?> = mapOf(
+    override val command: CharSequence = "^B0"
+    override val parameters: Map<CharSequence, Any?> = mapOf(
         "o" to orientation.code, "m" to magnification, "e" to eci, "s" to size,
         "r" to readerInit, "sy" to symbols, "id" to id
     )

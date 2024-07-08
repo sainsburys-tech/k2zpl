@@ -7,6 +7,6 @@ internal data class BarcodeFieldDefault(val width: Int, val widthRatio: Int, val
         require(height in 1..32000) { "Height must be between 1 and 32000" }
     }
 
-    override val command: String = "^BY"
-    override val parameters: Map<String, Any?> = mapOf("w" to width, "r" to widthRatio, "h" to height)
+    override val command: CharSequence = "^BY"
+    override val parameters: Map<CharSequence, Any?> = mapOf("w" to width, "r" to widthRatio, "h" to height)
 }
