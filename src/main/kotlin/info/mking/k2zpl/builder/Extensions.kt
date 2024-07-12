@@ -13,7 +13,6 @@ import info.mking.k2zpl.command.FieldOrigin
 import info.mking.k2zpl.command.FieldSeparator
 import info.mking.k2zpl.command.Font
 import info.mking.k2zpl.command.FontAt
-import info.mking.k2zpl.command.GraphicBox
 import info.mking.k2zpl.command.GraphicCircle
 import info.mking.k2zpl.command.GraphicDiagonalLine
 import info.mking.k2zpl.command.GraphicEllipse
@@ -188,18 +187,6 @@ fun ZplBuilder.defaultMediaDarkness(darkness: Int) {
  */
 fun ZplBuilder.fieldOrigin(x: Int, y: Int, alignment: ZplFieldOrientation? = null) {
     command(FieldOrigin(x, y, alignment))
-}
-
-/**
- * Draws a graphic box.
- * @param width The width of the box.
- * @param height The height of the box.
- * @param thickness The thickness of the box border.
- * @param color The color of the box border (optional).
- * @param rounding The corner rounding of the box (optional).
- */
-fun ZplBuilder.graphicBox(width: Int, height: Int, thickness: Int, color: ZplLineColor? = null, rounding: Int? = null) {
-    command(GraphicBox(width, height, thickness, color, rounding))
 }
 
 /**
