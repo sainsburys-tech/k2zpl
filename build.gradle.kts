@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "info.mking.k2zpl"
-version = "0.0.7"
+version = "0.0.8"
 
 repositories {
     mavenCentral()
@@ -29,7 +29,7 @@ tasks.test {
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
     signAllPublications()
-    coordinates("info.mking.k2zpl", "k2zpl", "0.0.7")
+    coordinates("info.mking.k2zpl", "k2zpl", "0.0.8")
     pom {
         name.set("k2zpl")
         description.set("Kotlin DSL for ZPL (Zebra Programming Language)")
