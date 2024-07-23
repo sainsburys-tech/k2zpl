@@ -13,7 +13,7 @@ internal data class FieldBlock(
     }
 
     override val command: CharSequence = "^FB"
-    override val parameters: Map<CharSequence, Any?> = mapOf(
+    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf(
         "w" to width, "l" to lines, "s" to lineSpacing, "a" to alignment.code, "h" to hangingIndent
     )
 }

@@ -16,7 +16,7 @@ internal data class Code128Barcode(
     }
 
     override val command: CharSequence = "^B0"
-    override val parameters: Map<CharSequence, Any?> = mapOf(
+    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf(
         "o" to orientation.code, "m" to magnification, "e" to eci, "s" to size,
         "r" to readerInit, "sy" to symbols, "id" to id
     )

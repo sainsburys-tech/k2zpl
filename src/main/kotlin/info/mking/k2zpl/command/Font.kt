@@ -9,5 +9,5 @@ internal data class Font(val font: ZplFont, val height: Int, val width: Int) : Z
     }
 
     override val command: CharSequence = "^A"
-    override val parameters: Map<CharSequence, Any?> = mapOf("f" to font.code, "h" to height, "w" to width)
+    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf("f" to font.code, "h" to height, "w" to width)
 }

@@ -15,7 +15,7 @@ internal data class GraphicEllipse(
     }
 
     override val command: CharSequence = "^GE"
-    override val parameters: Map<CharSequence, Any?> = buildMap {
+    override val parameters: LinkedHashMap<CharSequence, Any?> = buildLinkedMap {
         putAll(mapOf("w" to width, "h" to height, "t" to thickness))
         if (color != null) put("c", color.code)
     }

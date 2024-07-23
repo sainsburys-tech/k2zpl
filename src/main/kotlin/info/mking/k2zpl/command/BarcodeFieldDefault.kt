@@ -8,5 +8,5 @@ internal data class BarcodeFieldDefault(val width: Int, val widthRatio: Int, val
     }
 
     override val command: CharSequence = "^BY"
-    override val parameters: Map<CharSequence, Any?> = mapOf("w" to width, "r" to widthRatio, "h" to height)
+    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf("w" to width, "r" to widthRatio, "h" to height)
 }

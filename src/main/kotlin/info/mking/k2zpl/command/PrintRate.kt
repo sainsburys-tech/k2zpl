@@ -9,5 +9,5 @@ internal data class PrintRate(val speed: ZplPrintSpeed, val darkness: Int) : Zpl
     }
 
     override val command: CharSequence = "^PR"
-    override val parameters: Map<CharSequence, Any?> = mapOf("s" to speed.code, "d" to darkness)
+    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf("s" to speed.code, "d" to darkness)
 }

@@ -14,7 +14,7 @@ internal data class PrintQuantity(
     }
 
     override val command: CharSequence = "^PQ"
-    override val parameters: Map<CharSequence, Any?> = buildMap {
+    override val parameters: LinkedHashMap<CharSequence, Any?> = buildLinkedMap {
         put("q", quantity)
         if (labelsBetweenPauses != null) put("lbp", labelsBetweenPauses)
         if (replicates != null) put("r", replicates)

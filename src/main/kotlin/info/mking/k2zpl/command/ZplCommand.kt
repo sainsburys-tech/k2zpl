@@ -2,7 +2,7 @@ package info.mking.k2zpl.command
 
 interface ZplCommand {
     val command: CharSequence
-    val parameters: Map<CharSequence, Any?> get() = emptyMap()
+    val parameters: LinkedHashMap<CharSequence, Any?> get() = linkedMapOf()
     fun build(stringBuilder: StringBuilder) = stringBuilder.apply {
         append(command)
         with(parameters.values.iterator()) {
@@ -14,3 +14,6 @@ interface ZplCommand {
         }
     }
 }
+
+fun <K, V> buildLinkedMap(block: LinkedHashMap<K, V>.() -> Unit) =
+    linkedMapOf<K, V>().apply(block)

@@ -15,7 +15,7 @@ internal data class Code39Barcode(
     }
 
     override val command: CharSequence = "^B1"
-    override val parameters: Map<CharSequence, Any?> = mapOf(
+    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf(
         "o" to orientation.code,
         "c" to checkDigit.toString(),
         "h" to height,

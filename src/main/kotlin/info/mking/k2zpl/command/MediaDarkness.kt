@@ -6,5 +6,5 @@ internal data class MediaDarkness(val darkness: Int) : ZplCommand {
     }
 
     override val command: CharSequence = "^MD"
-    override val parameters: Map<CharSequence, Any?> = mapOf("d" to darkness)
+    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf("d" to darkness)
 }

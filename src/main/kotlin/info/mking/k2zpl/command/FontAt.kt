@@ -10,6 +10,6 @@ internal data class FontAt(val orientation: ZplFieldOrientation, val height: Int
     }
 
     override val command: CharSequence = "^A@"
-    override val parameters: Map<CharSequence, Any?> =
-        mapOf("o" to orientation.code, "h" to height, "w" to width, "p" to path)
+    override val parameters: LinkedHashMap<CharSequence, Any?> =
+        linkedMapOf("o" to orientation.code, "h" to height, "w" to width, "p" to path)
 }

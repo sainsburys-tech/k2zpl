@@ -6,5 +6,5 @@ internal data class LabelLength(val length: Int) : ZplCommand {
     }
 
     override val command: CharSequence = "^LL"
-    override val parameters: Map<CharSequence, Any?> = mapOf("l" to length)
+    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf("l" to length)
 }

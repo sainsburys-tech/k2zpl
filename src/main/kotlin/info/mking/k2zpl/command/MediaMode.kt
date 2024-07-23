@@ -6,7 +6,7 @@ import info.mking.k2zpl.command.options.ZplPreprintedLabelHandling
 internal data class MediaMode(val mediaMode: ZplMediaMode, val preprintedLabelHandling: ZplPreprintedLabelHandling) :
     ZplCommand {
     override val command: CharSequence = "^MM"
-    override val parameters: Map<CharSequence, Any?> =
-        mapOf("mode" to mediaMode.value, "preprinted" to preprintedLabelHandling.value)
+    override val parameters: LinkedHashMap<CharSequence, Any?> =
+        linkedMapOf("mode" to mediaMode.value, "preprinted" to preprintedLabelHandling.value)
 }
 

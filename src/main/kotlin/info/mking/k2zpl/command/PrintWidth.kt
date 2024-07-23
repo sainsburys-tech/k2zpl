@@ -6,5 +6,5 @@ internal data class PrintWidth(val width: Int) : ZplCommand {
     }
 
     override val command: CharSequence = "^PW"
-    override val parameters: Map<CharSequence, Any?> = mapOf("w" to width)
+    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf("w" to width)
 }
