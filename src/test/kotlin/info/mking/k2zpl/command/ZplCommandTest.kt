@@ -18,6 +18,12 @@ class ZplCommandTest : DescribeSpec({
         it("outputs command with two parameters") {
             ZplCommandWithMultipleParameters().testBuildString() shouldBe "^ZCPSvalue-one,value-two"
         }
+        it("does not add null value first parameter") {
+            ZplCommandWitNullFirstParameter().testBuildString() shouldBe "^ZCPNvalue-two"
+        }
+        it("does not add null value second parameter") {
+            ZplCommandWitNullSecondParameter().testBuildString() shouldBe "^ZCPNSvalue-one"
+        }
     }
 })
 
@@ -36,5 +42,19 @@ class ZplCommandWithMultipleParameters : ZplCommand {
     override val command = "^ZCPS"
     override val parameters: LinkedHashMap<CharSequence, Any?> = buildLinkedMap {
         putAll(mapOf("param-one" to "value-one", "param-two" to "value-two"))
+    }
+}
+
+class ZplCommandWitNullFirstParameter : ZplCommand {
+    override val command = "^ZCPN"
+    override val parameters: LinkedHashMap<CharSequence, Any?> = buildLinkedMap {
+        putAll(mapOf("param-one" to null, "param-two" to "value-two"))
+    }
+}
+
+class ZplCommandWitNullSecondParameter : ZplCommand {
+    override val command = "^ZCPNS"
+    override val parameters: LinkedHashMap<CharSequence, Any?> = buildLinkedMap {
+        putAll(mapOf("param-one" to "value-one", "param-two" to null))
     }
 }

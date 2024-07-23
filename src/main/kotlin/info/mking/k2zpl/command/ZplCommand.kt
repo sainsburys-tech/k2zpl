@@ -6,14 +6,24 @@ interface ZplCommand {
     fun build(stringBuilder: StringBuilder) = stringBuilder.apply {
         append(command)
         with(parameters.values.iterator()) {
-            if (hasNext()) append(next().toString())
+            if (hasNext()) {
+                nextNotNull { append(it.toString()) }
+            }
             while (hasNext()) {
-                append(',')
-                append(next().toString())
+                nextNotNull {
+                    if (length > command.length) {
+                        append(',')
+                    }
+                    append(it.toString())
+                }
             }
         }
     }
 }
 
-fun <K, V> buildLinkedMap(block: LinkedHashMap<K, V>.() -> Unit) =
+private fun <T> Iterator<T>.nextNotNull(block: (T) -> Unit) {
+    next()?.let { block(it) }
+}
+
+internal fun <K, V> buildLinkedMap(block: LinkedHashMap<K, V>.() -> Unit) =
     linkedMapOf<K, V>().apply(block)
