@@ -59,6 +59,7 @@ class GraphicBoxTest : DescribeSpec({
                 row(1, 32001, 1, 1),
                 row(1, 1, 0, 1),
                 row(1, 1, 32001, 1),
+                row(1, 1, 1, -1),
                 row(1, 1, 1, 9)
             ).forAll { width, height, thickness, rounding ->
                 shouldThrow<IllegalArgumentException> {
