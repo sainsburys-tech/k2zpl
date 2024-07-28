@@ -26,15 +26,6 @@ import info.mking.k2zpl.command.options.ZplTextAlignment
 import info.mking.k2zpl.command.options.ZplYesNo
 
 /**
- * Sets the label home position.
- * @param x The x-coordinate of the label home.
- * @param y The y-coordinate of the label home.
- */
-fun ZplBuilder.labelHome(x: Int, y: Int) {
-    command(LabelHome(x = x, y = y))
-}
-
-/**
  * Sets the label shift.
  * @param shift The shift amount.
  */
