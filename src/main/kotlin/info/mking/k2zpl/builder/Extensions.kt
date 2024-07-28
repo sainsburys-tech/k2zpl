@@ -8,7 +8,6 @@ import info.mking.k2zpl.command.FieldData
 import info.mking.k2zpl.command.FieldOrientation
 import info.mking.k2zpl.command.FieldOrigin
 import info.mking.k2zpl.command.FieldSeparator
-import info.mking.k2zpl.command.Font
 import info.mking.k2zpl.command.FontAt
 import info.mking.k2zpl.command.GraphicField
 import info.mking.k2zpl.command.LabelLength
@@ -22,20 +21,6 @@ import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplPrintSpeed
 import info.mking.k2zpl.command.options.ZplTextAlignment
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Sets the font for text fields.
- * @param font The font to use.
- * @param height The height of the font.
- * @param width The width of the font.
- */
-fun ZplBuilder.font(font: ZplFont, height: Int, width: Int) {
-    command(Font(
-        font = font,
-        height = height,
-        width = width
-    ))
-}
 
 /**
  * Sets the font with additional path parameter.

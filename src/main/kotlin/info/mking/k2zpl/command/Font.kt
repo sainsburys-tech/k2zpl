@@ -1,5 +1,7 @@
 package info.mking.k2zpl.command
 
+import info.mking.k2zpl.builder.ZplBuilder
+import info.mking.k2zpl.builder.command
 import info.mking.k2zpl.command.options.ZplFont
 
 internal data class Font(val font: ZplFont, val height: Int, val width: Int) : ZplCommand {
@@ -9,5 +11,23 @@ internal data class Font(val font: ZplFont, val height: Int, val width: Int) : Z
     }
 
     override val command: CharSequence = "^A"
-    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf("f" to font.code, "h" to height, "w" to width)
+    override val parameters: LinkedHashMap<CharSequence, Any?> =
+        linkedMapOf("f" to font.code, "h" to height, "w" to width)
+}
+
+
+/**
+ * Sets the font for text fields.
+ * @param font The font to use.
+ * @param height The height of the font.
+ * @param width The width of the font.
+ */
+fun ZplBuilder.font(font: ZplFont, height: Int, width: Int) {
+    command(
+        Font(
+            font = font,
+            height = height,
+            width = width
+        )
+    )
 }

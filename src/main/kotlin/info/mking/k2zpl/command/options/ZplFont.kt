@@ -12,4 +12,8 @@ enum class ZplFont(val code: Char) {
     G('G'),
     H('H'),
     GS('0'); // Graphic Symbol font
+
+    override fun toString(): String {
+        return code.toString()
+    }
 }
