@@ -2,10 +2,11 @@
 
 package info.mking.k2zpl.builder
 
-import info.mking.k2zpl.command.Code39Barcode
+import info.mking.k2zpl.command.BarCode
 import info.mking.k2zpl.command.EndFormat
 import info.mking.k2zpl.command.FieldBlock
 import info.mking.k2zpl.command.FieldData
+import info.mking.k2zpl.command.FieldOrientation
 import info.mking.k2zpl.command.FieldOrigin
 import info.mking.k2zpl.command.FieldSeparator
 import info.mking.k2zpl.command.Font
@@ -33,7 +34,7 @@ import info.mking.k2zpl.command.options.ZplTextAlignment
  * @param width The width of the label.
  */
 fun ZplBuilder.printWidth(width: Int) {
-    command(PrintWidth(width))
+    command(PrintWidth(width = width))
 }
 
 /**
@@ -42,7 +43,7 @@ fun ZplBuilder.printWidth(width: Int) {
  * @param y The y-coordinate of the label home.
  */
 fun ZplBuilder.labelHome(x: Int, y: Int) {
-    command(LabelHome(x, y))
+    command(LabelHome(x = x, y = y))
 }
 
 /**
@@ -50,7 +51,7 @@ fun ZplBuilder.labelHome(x: Int, y: Int) {
  * @param shift The shift amount.
  */
 fun ZplBuilder.labelShift(shift: Int) {
-    command(LabelShift(shift))
+    command(LabelShift(shift = shift))
 }
 
 /**
@@ -60,7 +61,11 @@ fun ZplBuilder.labelShift(shift: Int) {
  * @param width The width of the font.
  */
 fun ZplBuilder.font(font: ZplFont, height: Int, width: Int) {
-    command(Font(font, height, width))
+    command(Font(
+        font = font,
+        height = height,
+        width = width
+    ))
 }
 
 /**
@@ -71,7 +76,12 @@ fun ZplBuilder.font(font: ZplFont, height: Int, width: Int) {
  * @param path The path to the font file.
  */
 fun ZplBuilder.fontAt(orientation: ZplFieldOrientation, height: Int, width: Int, path: String) {
-    command(FontAt(orientation, height, width, path))
+    command(FontAt(
+        orientation = orientation,
+        height = height,
+        width = width,
+        path = path
+    ))
 }
 
 /**
@@ -83,7 +93,13 @@ fun ZplBuilder.fontAt(orientation: ZplFieldOrientation, height: Int, width: Int,
  * @param hangingIndent The hanging indent for the block.
  */
 fun ZplBuilder.fieldBlock(width: Int, lines: Int, lineSpacing: Int, alignment: ZplTextAlignment, hangingIndent: Int) {
-    command(FieldBlock(width, lines, lineSpacing, alignment, hangingIndent))
+    command(FieldBlock(
+        width = width,
+        lines = lines,
+        lineSpacing = lineSpacing,
+        alignment = alignment,
+        hangingIndent = hangingIndent
+    ))
 }
 
 /**
@@ -101,7 +117,13 @@ fun ZplBuilder.code39Barcode(
     line: Int,
     lineAbove: Boolean
 ) {
-    command(Code39Barcode(orientation, checkDigit, height, line, lineAbove))
+    command(BarCode(
+        orientation = orientation,
+        checkDigit = checkDigit,
+        height = height,
+        line = line,
+        lineAbove = lineAbove
+    ))
 }
 
 /**
@@ -109,7 +131,7 @@ fun ZplBuilder.code39Barcode(
  * @param orientation The orientation of the field.
  */
 fun ZplBuilder.defaultFieldOrientation(orientation: ZplFieldOrientation) {
-    command(info.mking.k2zpl.command.FieldOrientation(orientation))
+    command(command = FieldOrientation(orientation = orientation))
 }
 
 /**
@@ -118,7 +140,7 @@ fun ZplBuilder.defaultFieldOrientation(orientation: ZplFieldOrientation) {
  * @param darkness The print darkness.
  */
 fun ZplBuilder.defaultPrintRate(speed: ZplPrintSpeed, darkness: Int) {
-    command(PrintRate(speed, darkness))
+    command(PrintRate(speed = speed, darkness = darkness))
 }
 
 /**
@@ -126,7 +148,7 @@ fun ZplBuilder.defaultPrintRate(speed: ZplPrintSpeed, darkness: Int) {
  * @param darkness The darkness level.
  */
 fun ZplBuilder.defaultMediaDarkness(darkness: Int) {
-    command(MediaDarkness(darkness))
+    command(MediaDarkness(darkness = darkness))
 }
 
 /**
@@ -136,7 +158,7 @@ fun ZplBuilder.defaultMediaDarkness(darkness: Int) {
  * @param alignment The alignment of the field (optional).
  */
 fun ZplBuilder.fieldOrigin(x: Int, y: Int, alignment: ZplFieldOrientation? = null) {
-    command(FieldOrigin(x, y, alignment))
+    command(FieldOrigin(x = x, y = y, alignment = alignment))
 }
 
 /**
@@ -148,7 +170,13 @@ fun ZplBuilder.fieldOrigin(x: Int, y: Int, alignment: ZplFieldOrientation? = nul
  * @param data The data for the graphic field.
  */
 fun ZplBuilder.graphicField(format: Char, dataBytes: Int, totalBytes: Int, rowBytes: Int, data: String) {
-    command(GraphicField(format, dataBytes, totalBytes, rowBytes, data))
+    command(GraphicField(
+        format = format,
+        dataBytes = dataBytes,
+        totalBytes = totalBytes,
+        rowBytes = rowBytes,
+        data = data
+    ))
 }
 
 /**

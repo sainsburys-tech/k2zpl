@@ -2,8 +2,9 @@ package info.mking.k2zpl.command
 
 import info.mking.k2zpl.command.options.ZplFieldOrientation
 
-internal data class Code39Barcode(
-    val orientation: ZplFieldOrientation,
+internal data class BarCode(
+    val type: BarcodeType = BarcodeType.CODE_39,
+    val orientation: ZplFieldOrientation = ZplFieldOrientation.NORMAL,
     val checkDigit: Boolean,
     val height: Int,
     val line: Int,
@@ -22,4 +23,8 @@ internal data class Code39Barcode(
         "l" to line,
         "la" to lineAbove.toString()
     )
+
+    enum class BarcodeType {
+        CODE_39
+    }
 }

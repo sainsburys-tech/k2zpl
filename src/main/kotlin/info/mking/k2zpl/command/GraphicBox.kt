@@ -42,7 +42,13 @@ fun ZplBuilder.graphicBox(
     color: ZplLineColor = ZplLineColor.BLACK,
     rounding: Int = 0
 ) {
-    command(GraphicBox(width, height, thickness, color, rounding))
+    command(GraphicBox(
+        width = width,
+        height = height,
+        thickness = thickness,
+        color = color,
+        rounding = rounding
+    ))
 }
 
 /**
@@ -52,5 +58,10 @@ fun ZplBuilder.graphicBox(
  * @param color The color of the line
  */
 fun ZplBuilder.line(width: Int, thickness: Int = 1, color: ZplLineColor = ZplLineColor.BLACK) {
-    graphicBox(width, thickness, thickness, color)
+    graphicBox(
+        width = width,
+        height = thickness,
+        thickness = thickness,
+        color = color
+    )
 }
