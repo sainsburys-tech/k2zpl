@@ -248,7 +248,7 @@ fun ZplBuilder.field(x: Int, y: Int, font: ZplFont, fontHeight: Int, fontWidth: 
     addField(x, y, font, fontHeight, fontWidth, data)
 }
 
-fun Boolean.toZplYesNo(): ZplYesNo = when(this) {
+internal fun Boolean.toZplYesNo(): ZplYesNo = when(this) {
     true -> ZplYesNo.YES
     else -> ZplYesNo.NO
 }

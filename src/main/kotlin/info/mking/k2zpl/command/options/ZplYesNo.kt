@@ -1,6 +1,6 @@
 package info.mking.k2zpl.command.options
 
-enum class ZplYesNo(val value: String) {
+internal enum class ZplYesNo(val value: String) {
     YES("Y"),
     NO("N");
 
