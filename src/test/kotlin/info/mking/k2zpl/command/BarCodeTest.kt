@@ -68,9 +68,37 @@ class BarCodeTest : DescribeSpec({
     describe("barcode extension") {
         it("outputs the correct command") {
             val result = k2zpl {
-                barcode(checkDigit = false, height = 10, line = 7, lineAbove = true)
+                barcode(
+                    data = "1234567890",
+                    x = 10,
+                    y = 10,
+                    height = 10,
+                    lineThickness = 7,
+                    barcodeType = ZplBarcodeType.CODE_39,
+                    orientation = ZplFieldOrientation.NORMAL,
+                    checkDigit = false,
+                    lineAbove = true
+                )
             }
-            result shouldBe "^B1N,N,10,7,Y\n"
+            result shouldBe """
+                ^FO10,10
+                ^B1N,N,10,7,Y
+                ^FD1234567890
+                ^FS
+                
+            """.trimIndent()
+        }
+        it("uses default values") {
+            val result = k2zpl {
+                barcode(data = "1234567890", x = 10, y = 10, height = 10, lineThickness = 7)
+            }
+            result shouldBe """
+                ^FO10,10
+                ^B1N,N,10,7,N
+                ^FD1234567890
+                ^FS
+                
+            """.trimIndent()
         }
     }
 })

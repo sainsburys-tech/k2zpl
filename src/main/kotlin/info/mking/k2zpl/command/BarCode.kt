@@ -2,6 +2,9 @@ package info.mking.k2zpl.command
 
 import info.mking.k2zpl.builder.ZplBuilder
 import info.mking.k2zpl.builder.command
+import info.mking.k2zpl.builder.fieldData
+import info.mking.k2zpl.builder.fieldOrigin
+import info.mking.k2zpl.builder.fieldSeparator
 import info.mking.k2zpl.builder.toZplYesNo
 import info.mking.k2zpl.command.options.ZplBarcodeType
 import info.mking.k2zpl.command.options.ZplFieldOrientation
@@ -31,31 +34,39 @@ internal data class BarCode(
 }
 
 /**
- * Creates a Code 39 barcode.
+ * Creates a Code 39 barcode marker
+ * @param data data encoded in the barcode
+ * @param x horizontal position
+ * @param y vertical position
  * @param barcodeType Barcode type
  * @param orientation The orientation of the barcode.
  * @param checkDigit Whether to include a check digit.
  * @param height The height of the barcode.
- * @param line The line thickness of the barcode.
+ * @param lineThickness The line thickness of the barcode.
  * @param lineAbove Whether to include a line above the barcode.
  */
 fun ZplBuilder.barcode(
+    data: String,
+    x: Int,
+    y: Int,
+    height: Int,
+    lineThickness: Int,
     barcodeType: ZplBarcodeType = ZplBarcodeType.CODE_39,
     orientation: ZplFieldOrientation = ZplFieldOrientation.NORMAL,
-    checkDigit: Boolean,
-    height: Int,
-    line: Int,
-    lineAbove: Boolean
+    checkDigit: Boolean = false,
+    lineAbove: Boolean = false
 ) {
+    fieldOrigin(x, y)
     command(
         BarCode(
             type = barcodeType,
             orientation = orientation,
             checkDigit = checkDigit.toZplYesNo(),
             height = height,
-            line = line,
+            line = lineThickness,
             lineAbove = lineAbove.toZplYesNo()
         )
     )
+    fieldData(data)
+    fieldSeparator()
 }
-
