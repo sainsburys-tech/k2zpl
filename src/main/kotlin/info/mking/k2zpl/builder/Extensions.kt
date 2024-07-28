@@ -11,9 +11,7 @@ import info.mking.k2zpl.command.FieldSeparator
 import info.mking.k2zpl.command.Font
 import info.mking.k2zpl.command.FontAt
 import info.mking.k2zpl.command.GraphicField
-import info.mking.k2zpl.command.LabelHome
 import info.mking.k2zpl.command.LabelLength
-import info.mking.k2zpl.command.LabelShift
 import info.mking.k2zpl.command.MediaDarkness
 import info.mking.k2zpl.command.PrintQuantity
 import info.mking.k2zpl.command.PrintRate
@@ -24,14 +22,6 @@ import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplPrintSpeed
 import info.mking.k2zpl.command.options.ZplTextAlignment
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Sets the label shift.
- * @param shift The shift amount.
- */
-fun ZplBuilder.labelShift(shift: Int) {
-    command(LabelShift(shift = shift))
-}
 
 /**
  * Sets the font for text fields.
