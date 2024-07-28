@@ -8,5 +8,9 @@ enum class ZplMediaMode(val value: Char) {
     REWIND('R'),
     APPLICATOR('A'),
     CUTTER('C'),
-    DELAYED_CUT('D')
+    DELAYED_CUT('D');
+
+    override fun toString(): String {
+        return value.toString()
+    }
 }
