@@ -17,7 +17,6 @@ import info.mking.k2zpl.command.LabelShift
 import info.mking.k2zpl.command.MediaDarkness
 import info.mking.k2zpl.command.PrintQuantity
 import info.mking.k2zpl.command.PrintRate
-import info.mking.k2zpl.command.PrintWidth
 import info.mking.k2zpl.command.StartFormat
 import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.options.ZplFieldOrientation
@@ -25,14 +24,6 @@ import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplPrintSpeed
 import info.mking.k2zpl.command.options.ZplTextAlignment
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Sets the print width of the label.
- * @param width The width of the label.
- */
-fun ZplBuilder.printWidth(width: Int) {
-    command(PrintWidth(width = width))
-}
 
 /**
  * Sets the label home position.
