@@ -37,9 +37,9 @@ mavenPublishing {
         url.set("https://github.com/itsmattking/k2zpl/")
         licenses {
             license {
-                name.set("The Apache License, Version 2.0")
-                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                name.set("The Unlicense")
+                url.set("https://unlicense.org")
+                distribution.set("https://unlicense.org")
             }
         }
         developers {
