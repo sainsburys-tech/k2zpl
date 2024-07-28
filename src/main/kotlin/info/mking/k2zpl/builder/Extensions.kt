@@ -2,9 +2,6 @@
 
 package info.mking.k2zpl.builder
 
-import info.mking.k2zpl.command.BarcodeFieldDefault
-import info.mking.k2zpl.command.ChangeAlphanumericFont
-import info.mking.k2zpl.command.Code128Barcode
 import info.mking.k2zpl.command.Code39Barcode
 import info.mking.k2zpl.command.EndFormat
 import info.mking.k2zpl.command.FieldBlock
@@ -13,9 +10,6 @@ import info.mking.k2zpl.command.FieldOrigin
 import info.mking.k2zpl.command.FieldSeparator
 import info.mking.k2zpl.command.Font
 import info.mking.k2zpl.command.FontAt
-import info.mking.k2zpl.command.GraphicCircle
-import info.mking.k2zpl.command.GraphicDiagonalLine
-import info.mking.k2zpl.command.GraphicEllipse
 import info.mking.k2zpl.command.GraphicField
 import info.mking.k2zpl.command.LabelHome
 import info.mking.k2zpl.command.LabelLength
@@ -27,10 +21,8 @@ import info.mking.k2zpl.command.PrintRate
 import info.mking.k2zpl.command.PrintWidth
 import info.mking.k2zpl.command.StartFormat
 import info.mking.k2zpl.command.ZplCommand
-import info.mking.k2zpl.command.options.ZplDiagonalOrientation
 import info.mking.k2zpl.command.options.ZplFieldOrientation
 import info.mking.k2zpl.command.options.ZplFont
-import info.mking.k2zpl.command.options.ZplLineColor
 import info.mking.k2zpl.command.options.ZplMediaMode
 import info.mking.k2zpl.command.options.ZplPreprintedLabelHandling
 import info.mking.k2zpl.command.options.ZplPrintSpeed
@@ -95,28 +87,6 @@ fun ZplBuilder.fieldBlock(width: Int, lines: Int, lineSpacing: Int, alignment: Z
 }
 
 /**
- * Creates a Code 128 barcode.
- * @param orientation The orientation of the barcode.
- * @param magnification The magnification factor of the barcode.
- * @param eci The Extended Channel Interpretation value.
- * @param size The size of the barcode.
- * @param readerInit The reader initialization value.
- * @param symbols The number of symbols.
- * @param id The identifier for the barcode.
- */
-fun ZplBuilder.code128Barcode(
-    orientation: ZplFieldOrientation,
-    magnification: Int,
-    eci: Int,
-    size: Int,
-    readerInit: Char,
-    symbols: Int,
-    id: Int
-) {
-    command(Code128Barcode(orientation, magnification, eci, size, readerInit, symbols, id))
-}
-
-/**
  * Creates a Code 39 barcode.
  * @param orientation The orientation of the barcode.
  * @param checkDigit Whether to include a check digit.
@@ -135,31 +105,11 @@ fun ZplBuilder.code39Barcode(
 }
 
 /**
- * Sets the default field for barcodes.
- * @param width The width of the barcode field.
- * @param widthRatio The ratio of the width of the barcode field.
- * @param height The height of the barcode field.
- */
-fun ZplBuilder.defaultBarcodeField(width: Int, widthRatio: Int, height: Int) {
-    command(BarcodeFieldDefault(width, widthRatio, height))
-}
-
-/**
  * Sets the field orientation for text fields.
  * @param orientation The orientation of the field.
  */
 fun ZplBuilder.defaultFieldOrientation(orientation: ZplFieldOrientation) {
     command(info.mking.k2zpl.command.FieldOrientation(orientation))
-}
-
-/**
- * Sets the default font for alphanumeric text fields.
- * @param font The font to use.
- * @param height The height of the font.
- * @param width The width of the font.
- */
-fun ZplBuilder.defaultAlphanumericFont(font: ZplFont, height: Int, width: Int) {
-    command(ChangeAlphanumericFont(font, height, width))
 }
 
 /**
@@ -187,45 +137,6 @@ fun ZplBuilder.defaultMediaDarkness(darkness: Int) {
  */
 fun ZplBuilder.fieldOrigin(x: Int, y: Int, alignment: ZplFieldOrientation? = null) {
     command(FieldOrigin(x, y, alignment))
-}
-
-/**
- * Draws a graphic circle.
- * @param diameter The diameter of the circle.
- * @param thickness The thickness of the circle border.
- * @param color The color of the circle border (optional).
- */
-fun ZplBuilder.graphicCircle(diameter: Int, thickness: Int, color: ZplLineColor? = null) {
-    command(GraphicCircle(diameter, thickness, color))
-}
-
-/**
- * Draws a graphic diagonal line.
- * @param width The width of the line.
- * @param height The height of the line.
- * @param thickness The thickness of the line.
- * @param color The color of the line (optional).
- * @param orientation The orientation of the line (optional).
- */
-fun ZplBuilder.graphicDiagonalLine(
-    width: Int,
-    height: Int,
-    thickness: Int,
-    color: ZplLineColor? = null,
-    orientation: ZplDiagonalOrientation? = null
-) {
-    command(GraphicDiagonalLine(width, height, thickness, color, orientation))
-}
-
-/**
- * Draws a graphic ellipse.
- * @param width The width of the ellipse.
- * @param height The height of the ellipse.
- * @param thickness The thickness of the ellipse border.
- * @param color The color of the ellipse border (optional).
- */
-fun ZplBuilder.graphicEllipse(width: Int, height: Int, thickness: Int, color: ZplLineColor? = null) {
-    command(GraphicEllipse(width, height, thickness, color))
 }
 
 /**
