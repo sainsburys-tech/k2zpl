@@ -73,7 +73,7 @@ class GraphicBoxTest : DescribeSpec({
             }
         }
     }
-    describe("graphicBox helper") {
+    describe("graphicBox extension") {
         it("has correct minimum argument output") {
             val result = k2zpl {
                 graphicBox(100, 50)
@@ -87,7 +87,7 @@ class GraphicBoxTest : DescribeSpec({
             result shouldBe "^GB100,50,10,W,3\n"
         }
     }
-    describe("line helper") {
+    describe("line extension") {
         it("has correct minimum argument output") {
             val result = k2zpl {
                 line(1000, 1)

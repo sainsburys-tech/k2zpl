@@ -1,14 +1,19 @@
 package info.mking.k2zpl.command
 
+import info.mking.k2zpl.builder.ZplBuilder
+import info.mking.k2zpl.builder.command
+import info.mking.k2zpl.builder.toZplYesNo
+import info.mking.k2zpl.command.options.ZplBarcodeType
 import info.mking.k2zpl.command.options.ZplFieldOrientation
+import info.mking.k2zpl.command.options.ZplYesNo
 
 internal data class BarCode(
-    val type: BarcodeType = BarcodeType.CODE_39,
-    val orientation: ZplFieldOrientation = ZplFieldOrientation.NORMAL,
-    val checkDigit: Boolean,
+    val type: ZplBarcodeType,
+    val orientation: ZplFieldOrientation,
+    val checkDigit: ZplYesNo,
     val height: Int,
     val line: Int,
-    val lineAbove: Boolean
+    val lineAbove: ZplYesNo
 ) : ZplCommand {
     init {
         require(height in 1..32000) { "Height must be between 1 and 32000" }
@@ -23,8 +28,34 @@ internal data class BarCode(
         "l" to line,
         "la" to lineAbove.toString()
     )
-
-    enum class BarcodeType {
-        CODE_39
-    }
 }
+
+/**
+ * Creates a Code 39 barcode.
+ * @param barcodeType Barcode type
+ * @param orientation The orientation of the barcode.
+ * @param checkDigit Whether to include a check digit.
+ * @param height The height of the barcode.
+ * @param line The line thickness of the barcode.
+ * @param lineAbove Whether to include a line above the barcode.
+ */
+fun ZplBuilder.barcode(
+    barcodeType: ZplBarcodeType = ZplBarcodeType.CODE_39,
+    orientation: ZplFieldOrientation = ZplFieldOrientation.NORMAL,
+    checkDigit: Boolean,
+    height: Int,
+    line: Int,
+    lineAbove: Boolean
+) {
+    command(
+        BarCode(
+            type = barcodeType,
+            orientation = orientation,
+            checkDigit = checkDigit.toZplYesNo(),
+            height = height,
+            line = line,
+            lineAbove = lineAbove.toZplYesNo()
+        )
+    )
+}
+

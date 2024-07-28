@@ -2,7 +2,6 @@
 
 package info.mking.k2zpl.builder
 
-import info.mking.k2zpl.command.BarCode
 import info.mking.k2zpl.command.EndFormat
 import info.mking.k2zpl.command.FieldBlock
 import info.mking.k2zpl.command.FieldData
@@ -28,6 +27,7 @@ import info.mking.k2zpl.command.options.ZplMediaMode
 import info.mking.k2zpl.command.options.ZplPreprintedLabelHandling
 import info.mking.k2zpl.command.options.ZplPrintSpeed
 import info.mking.k2zpl.command.options.ZplTextAlignment
+import info.mking.k2zpl.command.options.ZplYesNo
 
 /**
  * Sets the print width of the label.
@@ -99,30 +99,6 @@ fun ZplBuilder.fieldBlock(width: Int, lines: Int, lineSpacing: Int, alignment: Z
         lineSpacing = lineSpacing,
         alignment = alignment,
         hangingIndent = hangingIndent
-    ))
-}
-
-/**
- * Creates a Code 39 barcode.
- * @param orientation The orientation of the barcode.
- * @param checkDigit Whether to include a check digit.
- * @param height The height of the barcode.
- * @param line The line thickness of the barcode.
- * @param lineAbove Whether to include a line above the barcode.
- */
-fun ZplBuilder.code39Barcode(
-    orientation: ZplFieldOrientation,
-    checkDigit: Boolean,
-    height: Int,
-    line: Int,
-    lineAbove: Boolean
-) {
-    command(BarCode(
-        orientation = orientation,
-        checkDigit = checkDigit,
-        height = height,
-        line = line,
-        lineAbove = lineAbove
     ))
 }
 
@@ -270,4 +246,9 @@ fun ZplBuilder.field(x: Int = 0, y: Int = 0, data: String) {
  */
 fun ZplBuilder.field(x: Int, y: Int, font: ZplFont, fontHeight: Int, fontWidth: Int, data: String) {
     addField(x, y, font, fontHeight, fontWidth, data)
+}
+
+fun Boolean.toZplYesNo(): ZplYesNo = when(this) {
+    true -> ZplYesNo.YES
+    else -> ZplYesNo.NO
 }
