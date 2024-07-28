@@ -7,13 +7,14 @@ import info.mking.k2zpl.command.Font
 import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.font
 import info.mking.k2zpl.command.options.ZplDpiSetting
+import info.mking.k2zpl.command.options.ZplFieldOrientation
 import info.mking.k2zpl.command.options.ZplFont
 import kotlin.math.roundToInt
 
 class ZplBuilder {
     private val commands = mutableListOf<ZplCommand>()
     private var _zplDpiSetting: ZplDpiSetting = ZplDpiSetting.Unset
-    private var defaultFont: Font = Font(ZplFont.A, 30.dots, 30.dots)
+    private var defaultFont: Font = Font(ZplFont.A, ZplFieldOrientation.NORMAL, 30.dots, 30.dots)
 
     var dpiSetting: ZplDpiSetting
         get() {
@@ -74,9 +75,14 @@ class ZplBuilder {
     /**
      * Sets the default font and font size.
      */
-    fun setDefaultFont(font: ZplFont = ZplFont.A, fontHeight: Int = 30, fontWidth: Int = 30) {
-        defaultFont = Font(font, fontHeight, fontWidth)
-        font(font, fontHeight, fontWidth) // Set the default font immediately
+    fun setDefaultFont(
+        font: ZplFont = ZplFont.A,
+        orientation: ZplFieldOrientation = ZplFieldOrientation.NORMAL,
+        fontHeight: Int = 30,
+        fontWidth: Int = 30
+    ) {
+        defaultFont = Font(font, orientation, fontHeight, fontWidth)
+        font(font, orientation, fontHeight, fontWidth) // Set the default font immediately
     }
 
     /**
@@ -84,7 +90,7 @@ class ZplBuilder {
      */
     fun addField(x: Int, y: Int, font: ZplFont, fontHeight: Int, fontWidth: Int, data: String) {
         fieldOrigin(x, y)
-        font(font, fontHeight, fontWidth)
+        font(font, defaultFont.orientation, fontHeight, fontWidth)
         fieldData(data)
         fieldSeparator()
     }
@@ -94,7 +100,7 @@ class ZplBuilder {
      */
     fun addField(x: Int = 0, y: Int = 0, data: String) {
         fieldOrigin(x, y)
-        font(defaultFont.font, defaultFont.height, defaultFont.width)
+        font(defaultFont.font, defaultFont.orientation, defaultFont.height, defaultFont.width)
         fieldData(data)
         fieldSeparator()
     }

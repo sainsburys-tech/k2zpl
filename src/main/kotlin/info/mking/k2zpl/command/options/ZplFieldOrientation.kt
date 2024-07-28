@@ -6,5 +6,9 @@ enum class ZplFieldOrientation(val code: Char) {
     NORMAL('N'),
     ROTATED_90('R'),
     INVERTED('I'),
-    BOTTOM_UP('B')
+    BOTTOM_UP('B');
+
+    override fun toString(): String {
+        return code.toString()
+    }
 }

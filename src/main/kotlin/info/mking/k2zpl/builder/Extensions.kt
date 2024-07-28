@@ -8,7 +8,6 @@ import info.mking.k2zpl.command.FieldData
 import info.mking.k2zpl.command.FieldOrientation
 import info.mking.k2zpl.command.FieldOrigin
 import info.mking.k2zpl.command.FieldSeparator
-import info.mking.k2zpl.command.FontAt
 import info.mking.k2zpl.command.GraphicField
 import info.mking.k2zpl.command.LabelLength
 import info.mking.k2zpl.command.MediaDarkness
@@ -21,22 +20,6 @@ import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplPrintSpeed
 import info.mking.k2zpl.command.options.ZplTextAlignment
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Sets the font with additional path parameter.
- * @param orientation The orientation of the font.
- * @param height The height of the font.
- * @param width The width of the font.
- * @param path The path to the font file.
- */
-fun ZplBuilder.fontAt(orientation: ZplFieldOrientation, height: Int, width: Int, path: String) {
-    command(FontAt(
-        orientation = orientation,
-        height = height,
-        width = width,
-        path = path
-    ))
-}
 
 /**
  * Formats a text block.
