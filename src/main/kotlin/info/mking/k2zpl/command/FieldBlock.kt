@@ -1,7 +1,6 @@
 package info.mking.k2zpl.command
 
 import info.mking.k2zpl.builder.ZplBuilder
-import info.mking.k2zpl.builder.command
 import info.mking.k2zpl.command.options.ZplTextAlignment
 
 internal data class FieldBlock(

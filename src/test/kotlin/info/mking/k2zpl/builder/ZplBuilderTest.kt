@@ -24,12 +24,12 @@ class ZplBuilderTest : DescribeSpec({
 
     describe("addCommand") {
         it("should call build on the passed command") {
-            subject.addCommand(mockZplCommand)
+            subject.command(mockZplCommand)
             subject.build()
             verify { mockZplCommand.build(ofType()) }
         }
         it("should used the pass string command") {
-            subject.addCommand("another-command")
+            subject.command("another-command")
             subject.build() shouldBe "another-command\n"
         }
     }

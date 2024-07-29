@@ -30,12 +30,12 @@ class ZplBuilder {
             _zplDpiSetting = value
         }
 
-    fun addCommand(command: ZplCommand) {
+    fun command(command: ZplCommand) {
         commands.add(command)
     }
 
-    fun addCommand(commandString: String) {
-        addCommand(CustomCommand(commandString))
+    fun command(commandString: String) {
+        command(CustomCommand(commandString))
     }
 
     fun build() = buildString {
@@ -91,7 +91,7 @@ class ZplBuilder {
     /**
      * Adds a field with specified font and size.
      */
-    fun addField(x: Int, y: Int, font: ZplFont, fontHeight: Int, fontWidth: Int, data: String) {
+    fun field(x: Int, y: Int, font: ZplFont, fontHeight: Int, fontWidth: Int, data: String) {
         fieldOrigin(x, y)
         font(font, defaultFont.orientation, fontHeight, fontWidth)
         fieldData(data)
@@ -101,7 +101,7 @@ class ZplBuilder {
     /**
      * Adds a field with the default font.
      */
-    fun addField(x: Int = 0, y: Int = 0, data: String) {
+    fun field(x: Int = 0, y: Int = 0, data: String) {
         fieldOrigin(x, y)
         font(defaultFont.font, defaultFont.orientation, defaultFont.height, defaultFont.width)
         fieldData(data)
