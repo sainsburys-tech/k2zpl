@@ -4,26 +4,14 @@ package info.mking.k2zpl.builder
 
 import info.mking.k2zpl.command.EndFormat
 import info.mking.k2zpl.command.FieldData
-import info.mking.k2zpl.command.FieldOrigin
 import info.mking.k2zpl.command.FieldSeparator
 import info.mking.k2zpl.command.GraphicField
 import info.mking.k2zpl.command.LabelLength
 import info.mking.k2zpl.command.PrintQuantity
 import info.mking.k2zpl.command.StartFormat
 import info.mking.k2zpl.command.ZplCommand
-import info.mking.k2zpl.command.options.ZplFieldOrientation
 import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Sets the origin for a field.
- * @param x The x-coordinate of the field origin.
- * @param y The y-coordinate of the field origin.
- * @param alignment The alignment of the field (optional).
- */
-fun ZplBuilder.fieldOrigin(x: Int, y: Int, alignment: ZplFieldOrientation? = null) {
-    command(FieldOrigin(x = x, y = y, alignment = alignment))
-}
 
 /**
  * Draws a graphic field.

@@ -81,7 +81,7 @@ class BarCodeTest : DescribeSpec({
                 )
             }
             result shouldBe """
-                ^FO10,10
+                ^FO10,10,0
                 ^B1N,N,10,7,Y
                 ^FD1234567890
                 ^FS
@@ -93,7 +93,7 @@ class BarCodeTest : DescribeSpec({
                 barcode(data = "1234567890", x = 10, y = 10, height = 10, lineThickness = 7)
             }
             result shouldBe """
-                ^FO10,10
+                ^FO10,10,0
                 ^B1N,N,10,7,N
                 ^FD1234567890
                 ^FS

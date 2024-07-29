@@ -5,6 +5,7 @@ package info.mking.k2zpl.builder
 import info.mking.k2zpl.command.CustomCommand
 import info.mking.k2zpl.command.Font
 import info.mking.k2zpl.command.ZplCommand
+import info.mking.k2zpl.command.fieldOrigin
 import info.mking.k2zpl.command.font
 import info.mking.k2zpl.command.options.ZplDpiSetting
 import info.mking.k2zpl.command.options.ZplFieldOrientation
