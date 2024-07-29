@@ -3,19 +3,10 @@
 package info.mking.k2zpl.builder
 
 import info.mking.k2zpl.command.EndFormat
-import info.mking.k2zpl.command.LabelLength
 import info.mking.k2zpl.command.StartFormat
 import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Sets the length of the label.
- * @param length The length of the label.
- */
-fun ZplBuilder.labelLength(length: Int) {
-    command(LabelLength(length))
-}
 
 /**
  * Starts the label format.
