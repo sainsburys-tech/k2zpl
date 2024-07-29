@@ -3,17 +3,9 @@
 package info.mking.k2zpl.builder
 
 import info.mking.k2zpl.command.EndFormat
-import info.mking.k2zpl.command.StartFormat
 import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Starts the label format.
- */
-fun ZplBuilder.startFormat() {
-    command(StartFormat)
-}
 
 /**
  * Ends the label format.
