@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED")
+
 package info.mking.k2zpl.command.options
 
 internal enum class ZplYesNo(val value: String) {
