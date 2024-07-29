@@ -64,3 +64,22 @@ fun ZplBuilder.line(width: Int, thickness: Int = 1, color: ZplLineColor = ZplLin
         color = color
     )
 }
+
+/**
+ * Draws a line using GraphicBox
+ * @param x horizontal position of line
+ * @param y vertical position of line
+ * @param width The width of the line
+ * @param thickness The thickness of the line
+ * @param color The color of the line
+ */
+fun ZplBuilder.line(x: Int, y: Int, width: Int, thickness: Int = 1, color: ZplLineColor = ZplLineColor.BLACK) {
+    fieldOrigin(x = x, y = y)
+    graphicBox(
+        width = width,
+        height = thickness,
+        thickness = thickness,
+        color = color
+    )
+    fieldSeparator()
+}

@@ -68,6 +68,17 @@ class FieldBlockTest : DescribeSpec({
             }
             result shouldBe "^FB100,1,0,L,0\n"
         }
-
+        it("outputs correct command with x, y and data") {
+            val result = k2zpl {
+                fieldBlock(x = 10, y = 10, width = 640, data = "some-data", maxLines = 1, lineSpacing = 10, alignment = ZplTextAlignment.LEFT)
+            }
+            result shouldBe """
+                ^FO10,10,0
+                ^FB640,1,10,L,0
+                ^FDsome-data
+                ^FS
+                
+                """.trimIndent()
+        }
     }
 })

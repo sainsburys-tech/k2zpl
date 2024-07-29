@@ -100,5 +100,11 @@ class GraphicBoxTest : DescribeSpec({
             }
             result shouldBe "^GB1000,10,10,W,0\n"
         }
+        it("uses x and y parameters") {
+            val result = k2zpl {
+                line(x = 10, y = 100, width = 1000, thickness = 1)
+            }
+            result shouldBe "^FO10,100,0\n^GB1000,1,1,B,0\n^FS\n"
+        }
     }
 })
