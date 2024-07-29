@@ -2,17 +2,9 @@
 
 package info.mking.k2zpl.builder
 
-import info.mking.k2zpl.command.EndFormat
 import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Ends the label format.
- */
-fun ZplBuilder.endFormat() {
-    command(EndFormat)
-}
 
 /**
  * Shortcut for addCommand
