@@ -4,7 +4,6 @@ package info.mking.k2zpl.builder
 
 import info.mking.k2zpl.command.EndFormat
 import info.mking.k2zpl.command.FieldData
-import info.mking.k2zpl.command.FieldOrientation
 import info.mking.k2zpl.command.FieldOrigin
 import info.mking.k2zpl.command.FieldSeparator
 import info.mking.k2zpl.command.GraphicField
@@ -18,14 +17,6 @@ import info.mking.k2zpl.command.options.ZplFieldOrientation
 import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplPrintSpeed
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Sets the field orientation for text fields.
- * @param orientation The orientation of the field.
- */
-fun ZplBuilder.defaultFieldOrientation(orientation: ZplFieldOrientation) {
-    command(command = FieldOrientation(orientation = orientation))
-}
 
 /**
  * Sets the print rate.
