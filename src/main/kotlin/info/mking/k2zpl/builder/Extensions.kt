@@ -8,21 +8,12 @@ import info.mking.k2zpl.command.FieldOrigin
 import info.mking.k2zpl.command.FieldSeparator
 import info.mking.k2zpl.command.GraphicField
 import info.mking.k2zpl.command.LabelLength
-import info.mking.k2zpl.command.MediaDarkness
 import info.mking.k2zpl.command.PrintQuantity
 import info.mking.k2zpl.command.StartFormat
 import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.options.ZplFieldOrientation
 import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Sets the media darkness.
- * @param darkness The darkness level.
- */
-fun ZplBuilder.defaultMediaDarkness(darkness: Int) {
-    command(MediaDarkness(darkness = darkness))
-}
 
 /**
  * Sets the origin for a field.
