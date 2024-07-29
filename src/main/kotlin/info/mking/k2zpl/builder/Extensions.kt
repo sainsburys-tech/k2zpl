@@ -5,31 +5,12 @@ package info.mking.k2zpl.builder
 import info.mking.k2zpl.command.EndFormat
 import info.mking.k2zpl.command.FieldData
 import info.mking.k2zpl.command.FieldSeparator
-import info.mking.k2zpl.command.GraphicField
 import info.mking.k2zpl.command.LabelLength
 import info.mking.k2zpl.command.PrintQuantity
 import info.mking.k2zpl.command.StartFormat
 import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Draws a graphic field.
- * @param format The format of the graphic field.
- * @param dataBytes The number of data bytes.
- * @param totalBytes The total number of bytes.
- * @param rowBytes The number of bytes per row.
- * @param data The data for the graphic field.
- */
-fun ZplBuilder.graphicField(format: Char, dataBytes: Int, totalBytes: Int, rowBytes: Int, data: String) {
-    command(GraphicField(
-        format = format,
-        dataBytes = dataBytes,
-        totalBytes = totalBytes,
-        rowBytes = rowBytes,
-        data = data
-    ))
-}
 
 /**
  * Adds a field separator.

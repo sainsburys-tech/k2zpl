@@ -1,7 +1,11 @@
 package info.mking.k2zpl.command
 
+import info.mking.k2zpl.builder.ZplBuilder
+import info.mking.k2zpl.builder.command
+import info.mking.k2zpl.command.options.ZplCompressionType
+
 internal data class GraphicField(
-    val format: Char,
+    val format: ZplCompressionType,
     val dataBytes: Int,
     val totalBytes: Int,
     val rowBytes: Int,
@@ -15,6 +19,30 @@ internal data class GraphicField(
 
     override val command: CharSequence = "^GF"
     override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf(
-        "f" to format, "db" to dataBytes, "tb" to totalBytes, "rb" to rowBytes, "d" to data
+        "f" to format,
+        "db" to dataBytes,
+        "tb" to totalBytes,
+        "rb" to rowBytes,
+        "d" to data
+    )
+}
+
+/**
+ * Draws a graphic field.
+ * @param format The format of the graphic field.
+ * @param dataBytes The number of data bytes.
+ * @param totalBytes The total number of bytes.
+ * @param rowBytes The number of bytes per row.
+ * @param data The data for the graphic field.
+ */
+fun ZplBuilder.graphicField(format: ZplCompressionType = ZplCompressionType.ASCII, dataBytes: Int, totalBytes: Int, rowBytes: Int, data: String) {
+    command(
+        GraphicField(
+            format = format,
+            dataBytes = dataBytes,
+            totalBytes = totalBytes,
+            rowBytes = rowBytes,
+            data = data
+        )
     )
 }
