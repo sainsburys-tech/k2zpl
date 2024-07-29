@@ -4,29 +4,10 @@ package info.mking.k2zpl.builder
 
 import info.mking.k2zpl.command.EndFormat
 import info.mking.k2zpl.command.LabelLength
-import info.mking.k2zpl.command.PrintQuantity
 import info.mking.k2zpl.command.StartFormat
 import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Sets the print quantity and related parameters.
- * @param quantity The number of labels to print.
- * @param labelsBetweenPauses The number of labels between pauses (optional).
- * @param replicates The number of times to replicate the label (optional).
- * @param noPause Whether to pause the printer (optional).
- * @param cutOnError Whether to cut on error (optional).
- */
-fun ZplBuilder.printQuantity(
-    quantity: Int,
-    labelsBetweenPauses: Int? = null,
-    replicates: Int? = null,
-    noPause: Boolean = false,
-    cutOnError: Boolean = false
-) {
-    command(PrintQuantity(quantity, labelsBetweenPauses, replicates, noPause, cutOnError))
-}
 
 /**
  * Sets the length of the label.
