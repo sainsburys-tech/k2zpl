@@ -3,21 +3,12 @@
 package info.mking.k2zpl.builder
 
 import info.mking.k2zpl.command.EndFormat
-import info.mking.k2zpl.command.FieldData
 import info.mking.k2zpl.command.LabelLength
 import info.mking.k2zpl.command.PrintQuantity
 import info.mking.k2zpl.command.StartFormat
 import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Adds field data.
- * @param data The data to be added to the field.
- */
-fun ZplBuilder.fieldData(data: String) {
-    command(FieldData(data))
-}
 
 /**
  * Sets the print quantity and related parameters.

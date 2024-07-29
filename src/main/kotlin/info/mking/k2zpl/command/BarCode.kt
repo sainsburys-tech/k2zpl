@@ -2,7 +2,6 @@ package info.mking.k2zpl.command
 
 import info.mking.k2zpl.builder.ZplBuilder
 import info.mking.k2zpl.builder.command
-import info.mking.k2zpl.builder.fieldData
 import info.mking.k2zpl.builder.toZplYesNo
 import info.mking.k2zpl.command.options.ZplBarcodeType
 import info.mking.k2zpl.command.options.ZplFieldOrientation
