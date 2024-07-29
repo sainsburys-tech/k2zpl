@@ -1,6 +1,7 @@
 package info.mking.k2zpl.command
 
 import info.mking.k2zpl.command.options.ZplJustification
+import info.mking.k2zpl.k2zpl
 import info.mking.k2zpl.testBuildString
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.IsolationMode
@@ -41,6 +42,20 @@ class FieldOriginTest : DescribeSpec({
                     fieldOrigin.copy(x = x, y = y)
                 }
             }
+        }
+    }
+    describe("fieldOrigin extension function") {
+        it("outputs correct command") {
+            val result = k2zpl {
+                fieldOrigin(x = 10, y = 10, justification = ZplJustification.RIGHT)
+            }
+            result shouldBe "^FO10,10,1\n"
+        }
+        it("outputs correct command with default parameters") {
+            val result = k2zpl {
+                fieldOrigin(x = 20, y = 20)
+            }
+            result shouldBe "^FO20,20,0\n"
         }
     }
 })
