@@ -3,7 +3,6 @@
 package info.mking.k2zpl.builder
 
 import info.mking.k2zpl.command.EndFormat
-import info.mking.k2zpl.command.FieldBlock
 import info.mking.k2zpl.command.FieldData
 import info.mking.k2zpl.command.FieldOrientation
 import info.mking.k2zpl.command.FieldOrigin
@@ -18,26 +17,7 @@ import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.options.ZplFieldOrientation
 import info.mking.k2zpl.command.options.ZplFont
 import info.mking.k2zpl.command.options.ZplPrintSpeed
-import info.mking.k2zpl.command.options.ZplTextAlignment
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Formats a text block.
- * @param width The width of the text block.
- * @param lines The number of lines in the text block.
- * @param lineSpacing The space between lines.
- * @param alignment The text alignment within the block.
- * @param hangingIndent The hanging indent for the block.
- */
-fun ZplBuilder.fieldBlock(width: Int, lines: Int, lineSpacing: Int, alignment: ZplTextAlignment, hangingIndent: Int) {
-    command(FieldBlock(
-        width = width,
-        lines = lines,
-        lineSpacing = lineSpacing,
-        alignment = alignment,
-        hangingIndent = hangingIndent
-    ))
-}
 
 /**
  * Sets the field orientation for text fields.

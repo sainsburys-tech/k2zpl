@@ -6,5 +6,9 @@ enum class ZplTextAlignment(val code: Char) {
     LEFT('L'),
     CENTER('C'),
     RIGHT('R'),
-    JUSTIFY('J')
+    JUSTIFY('J');
+
+    override fun toString(): String {
+        return code.toString()
+    }
 }
