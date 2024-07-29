@@ -10,22 +10,11 @@ import info.mking.k2zpl.command.GraphicField
 import info.mking.k2zpl.command.LabelLength
 import info.mking.k2zpl.command.MediaDarkness
 import info.mking.k2zpl.command.PrintQuantity
-import info.mking.k2zpl.command.PrintRate
 import info.mking.k2zpl.command.StartFormat
 import info.mking.k2zpl.command.ZplCommand
 import info.mking.k2zpl.command.options.ZplFieldOrientation
 import info.mking.k2zpl.command.options.ZplFont
-import info.mking.k2zpl.command.options.ZplPrintSpeed
 import info.mking.k2zpl.command.options.ZplYesNo
-
-/**
- * Sets the print rate.
- * @param speed The print speed.
- * @param darkness The print darkness.
- */
-fun ZplBuilder.defaultPrintRate(speed: ZplPrintSpeed, darkness: Int) {
-    command(PrintRate(speed = speed, darkness = darkness))
-}
 
 /**
  * Sets the media darkness.
