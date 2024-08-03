@@ -36,7 +36,7 @@ publishing {
     }
 }
 mavenPublishing {
-    coordinates("com.sainsburys", "k2zpl", "0.1.0")
+    coordinates("com.sainsburys.k2zpl", "k2zpl", "0.1.0")
     pom {
         name.set("k2zpl")
         description.set("Kotlin DSL for ZPL (Zebra Programming Language)")
