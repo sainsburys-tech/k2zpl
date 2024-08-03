@@ -8,7 +8,7 @@ jobs:
 
     runs-on: ubuntu-latest
     environment: Release
-    if: github.repository == 'itsmattking/k2zpl'
+    if: github.repository == 'sainsburys-tech/k2zpl'
 
     steps:
       - name: Checkout

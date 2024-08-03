@@ -8,7 +8,7 @@ plugins {
     id("com.vanniktech.maven.publish") version "0.29.0"
 }
 
-group = "info.mking.k2zpl"
+group = "com.sainsburys.k2zpl"
 version = "0.1.0"
 
 repositories {
@@ -26,20 +26,31 @@ tasks.test {
     useJUnitPlatform()
 }
 
+
+publishing {
+    repositories {
+        maven("https://maven.pkg.github.com/sainsburys-tech/k2zpl") {
+            name = "GitHubPackages"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
     signAllPublications()
-    coordinates("info.mking.k2zpl", "k2zpl", "0.1.0")
+    coordinates("com.sainsburys.k2zpl", "k2zpl", "0.1.0")
     pom {
         name.set("k2zpl")
         description.set("Kotlin DSL for ZPL (Zebra Programming Language)")
         inceptionYear.set("2024")
-        url.set("https://github.com/itsmattking/k2zpl/")
+        url.set("https://github.com/sainsburys-tech/k2zpl/")
         licenses {
             license {
-                name.set("The Unlicense")
-                url.set("https://unlicense.org")
-                distribution.set("https://unlicense.org")
+                name.set("MIT License")
+                url.set("https://github.com/sainsburys-tech/k2zpl/blob/main/LICENSE")
             }
         }
         developers {
@@ -50,9 +61,9 @@ mavenPublishing {
             }
         }
         scm {
-            url.set("https://github.com/itsmattking/k2zpl/")
-            connection.set("scm:git:git://github.com/itsmattking/k2zpl.git")
-            developerConnection.set("scm:git:ssh://git@github.com/itsmattking/k2zpl.git")
+            url.set("https://github.com/sainsburys-tech/k2zpl/")
+            connection.set("scm:git:git://github.com/sainsburys-tech/k2zpl.git")
+            developerConnection.set("scm:git:ssh://git@github.com/sainsburys-tech/k2zpl.git")
         }
     }
 }
