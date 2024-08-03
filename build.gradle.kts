@@ -1,5 +1,3 @@
-import com.vanniktech.maven.publish.SonatypeHost
-
 plugins {
     kotlin("jvm") version "1.9.23"
     id("maven-publish")
@@ -27,19 +25,18 @@ tasks.test {
 }
 
 
-publishing {
-    repositories {
-        maven("https://maven.pkg.github.com/sainsburys-tech/k2zpl") {
-            name = "GitHubPackages"
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+mavenPublishing {
+    publishing {
+        repositories {
+            maven("https://maven.pkg.github.com/sainsburys-tech/k2zpl") {
+                name = "GitHubPackages"
+                credentials {
+                    username = System.getenv("GITHUB_ACTOR")
+                    password = System.getenv("GITHUB_TOKEN")
+                }
             }
         }
     }
-}
-mavenPublishing {
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
     signAllPublications()
     coordinates("com.sainsburys.k2zpl", "k2zpl", "0.1.0")
     pom {
