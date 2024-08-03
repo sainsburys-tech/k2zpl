@@ -26,7 +26,7 @@ tasks.test {
 
 publishing {
     repositories {
-        maven("https://maven.pkg.github.com/sainsburys-tech/k2zpl") {
+        maven("https://maven.pkg.github.com/itsmattking/k2zpl") {
             name = "GitHubPackages"
             credentials {
                 password = System.getenv("GITHUB_TOKEN")
