@@ -24,20 +24,18 @@ tasks.test {
     useJUnitPlatform()
 }
 
-
-mavenPublishing {
-    publishing {
-        repositories {
-            maven("https://maven.pkg.github.com/sainsburys-tech/k2zpl") {
-                name = "GitHubPackages"
-                credentials {
-                    username = System.getenv("GITHUB_ACTOR")
-                    password = System.getenv("GITHUB_TOKEN")
-                }
+publishing {
+    repositories {
+        maven("https://maven.pkg.github.com/sainsburys-tech/k2zpl") {
+            name = "GitHubPackages"
+            credentials {
+                password = System.getenv("GITHUB_TOKEN")
+                username = System.getenv("GITHUB_ACTOR")
             }
         }
     }
-    signAllPublications()
+}
+mavenPublishing {
     coordinates("com.sainsburys.k2zpl", "k2zpl", "0.1.0")
     pom {
         name.set("k2zpl")
