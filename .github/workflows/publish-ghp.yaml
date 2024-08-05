@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'open'
+          distribution: 'microsoft'
       - uses: gradle/actions/setup-gradle@v3
       - name: Publish package
         run: ./gradlew publishMavenPublicationToGitHubPackagesRepository
