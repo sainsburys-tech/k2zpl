@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.sainsburys"
-version = "0.2.0"
+version = "0.2.1"
 
 repositories {
     mavenCentral()
@@ -36,7 +36,7 @@ publishing {
     }
 }
 mavenPublishing {
-    coordinates("com.sainsburys", "k2zpl", "0.2.0")
+    coordinates("com.sainsburys", "k2zpl", "0.2.1")
     pom {
         name.set("k2zpl")
         description.set("Kotlin DSL for ZPL (Zebra Programming Language)")
