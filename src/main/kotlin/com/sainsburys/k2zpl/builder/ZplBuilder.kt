@@ -2,9 +2,9 @@
 
 package com.sainsburys.k2zpl.builder
 
-import LazyCommand
 import com.sainsburys.k2zpl.command.CustomCommand
 import com.sainsburys.k2zpl.command.Font
+import com.sainsburys.k2zpl.command.LazyCommand
 import com.sainsburys.k2zpl.command.ZplCommand
 import com.sainsburys.k2zpl.command.fieldData
 import com.sainsburys.k2zpl.command.fieldOrigin

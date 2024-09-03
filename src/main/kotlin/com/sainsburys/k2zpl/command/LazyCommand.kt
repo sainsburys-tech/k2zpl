@@ -1,4 +1,4 @@
-import com.sainsburys.k2zpl.command.ZplCommand
+package com.sainsburys.k2zpl.command
 
 /**
  * Allow for lazy evaluation of a ZplCommand. This works by
