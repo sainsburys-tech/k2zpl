@@ -39,5 +39,15 @@ class LabelLengthTest : DescribeSpec({
             }
             result shouldBe "^LL1000\n"
         }
+        it("outputs correct command when using lambda") {
+            var size = 100
+            val result = k2zpl {
+                labelLength {
+                    size
+                }
+                size += 100
+            }
+            result shouldBe "^LL200\n"
+        }
     }
 })
