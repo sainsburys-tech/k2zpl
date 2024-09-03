@@ -2,6 +2,7 @@
 
 package com.sainsburys.k2zpl.builder
 
+import LazyCommand
 import com.sainsburys.k2zpl.command.CustomCommand
 import com.sainsburys.k2zpl.command.Font
 import com.sainsburys.k2zpl.command.ZplCommand
@@ -36,6 +37,10 @@ class ZplBuilder {
 
     fun command(commandString: String) {
         command(CustomCommand(commandString))
+    }
+
+    fun command(commandBlock: () -> ZplCommand) {
+        command(LazyCommand(commandBlock))
     }
 
     fun build() = buildString {

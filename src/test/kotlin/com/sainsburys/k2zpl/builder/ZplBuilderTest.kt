@@ -32,6 +32,13 @@ class ZplBuilderTest : DescribeSpec({
             subject.command("another-command")
             subject.build() shouldBe "another-command\n"
         }
+        it("should add lambda command") {
+            subject.command {
+                mockZplCommand
+            }
+            subject.build()
+            verify { mockZplCommand.build(ofType()) }
+        }
     }
     describe("dpiSetting") {
         it("throws an appropriate exception when Unset") {

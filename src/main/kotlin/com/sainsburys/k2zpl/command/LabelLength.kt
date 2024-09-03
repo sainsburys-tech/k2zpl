@@ -18,3 +18,14 @@ internal data class LabelLength(val length: Int) : ZplCommand {
 fun ZplBuilder.labelLength(length: Int) {
     command(LabelLength(length))
 }
+
+/**
+ * Sets the length of the label by lambda
+ * This allows for lazy evaluation of the length.
+ * @param length lambda with context of the current [ZplBuilder]
+ */
+fun ZplBuilder.labelLength(length: ZplBuilder.() -> Int) {
+    command {
+        LabelLength(length.invoke(this))
+    }
+}
