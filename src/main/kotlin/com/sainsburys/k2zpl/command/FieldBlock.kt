@@ -58,7 +58,7 @@ fun ZplBuilder.fieldBlock(
  * @param x horizontal position of fieldBlock
  * @param y vertical position of fieldBlock
  * @param width The width of the text block.
- * @param data content of block
+ * @param data content of block. Any newlines are substituted with \&
  * @param maxLines The number of lines in the text block.
  * @param lineSpacing The space between lines.
  * @param alignment The text alignment within the block.
@@ -82,6 +82,6 @@ fun ZplBuilder.fieldBlock(
         alignment = alignment,
         hangingIndent = hangingIndent
     )
-    fieldData(data)
+    fieldData(data, replaceNewlines = true)
     fieldSeparator()
 }
