@@ -14,11 +14,11 @@ internal data class FieldOrigin(
     }
 
     override val command: CharSequence = "^FO"
-    override val parameters: LinkedHashMap<CharSequence, Any?> = buildLinkedMap {
-        put("x", x)
-        put("y", y)
-        put("j", justification)
-    }
+    override val parameters: Map<CharSequence, Any?> = addParameters(
+        "x" to x,
+        "y" to y,
+        "j" to justification
+    )
 }
 
 /**

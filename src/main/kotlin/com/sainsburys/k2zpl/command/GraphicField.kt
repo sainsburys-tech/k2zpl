@@ -17,7 +17,7 @@ internal data class GraphicField(
     }
 
     override val command: CharSequence = "^GF"
-    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf(
+    override val parameters: Map<CharSequence, Any?> = addParameters(
         "f" to format,
         "db" to dataBytes,
         "tb" to totalBytes,

@@ -2,24 +2,22 @@ package com.sainsburys.k2zpl.command
 
 import com.sainsburys.k2zpl.builder.ZplBuilder
 
-internal data class FieldData(val data: String, val replaceNewlines: Boolean = false) : ZplCommand {
+internal data class FieldData(val data: String) : ZplCommand {
     override val command: CharSequence = "^FD"
-    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf("d" to data)
+    override val parameters: Map<CharSequence, Any?> = addParameters("d" to data)
 
     override fun build(stringBuilder: StringBuilder): StringBuilder {
-        return with(stringBuilder) {
-            append(command)
-            append(
-                (parameters["d"] as? CharSequence).convertNewlinesIf(replaceNewlines)
+        return stringBuilder
+            .append(command)
+            .append(
+                (parameters["d"] as? CharSequence).convertNewlines()
             )
-        }
     }
 
-    private fun CharSequence?.convertNewlinesIf(replaceNewlines: Boolean): String {
+    private fun CharSequence?.convertNewlines(): String {
         return when {
             this == null -> ""
-            replaceNewlines -> toString().replace("\n", "\\&")
-            else -> toString()
+            else -> toString().replace("\n", "\\&")
         }
     }
 }
@@ -27,8 +25,7 @@ internal data class FieldData(val data: String, val replaceNewlines: Boolean = f
 /**
  * Adds field data.
  * @param data The data to be added to the field.
- * @param replaceNewlines set to true to replace \n with ZPL newline character (\&)
  */
-fun ZplBuilder.fieldData(data: String, replaceNewlines: Boolean = false) {
-    command(FieldData(data, replaceNewlines))
+fun ZplBuilder.fieldData(data: String) {
+    command(FieldData(data))
 }

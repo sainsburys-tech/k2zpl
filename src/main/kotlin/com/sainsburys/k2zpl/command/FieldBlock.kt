@@ -18,7 +18,7 @@ internal data class FieldBlock(
     }
 
     override val command: CharSequence = "^FB"
-    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf(
+    override val parameters: Map<CharSequence, Any?> = addParameters(
         "w" to width,
         "l" to maxLines,
         "s" to lineSpacing,
@@ -82,6 +82,6 @@ fun ZplBuilder.fieldBlock(
         alignment = alignment,
         hangingIndent = hangingIndent
     )
-    fieldData(data, replaceNewlines = true)
+    fieldData(data)
     fieldSeparator()
 }

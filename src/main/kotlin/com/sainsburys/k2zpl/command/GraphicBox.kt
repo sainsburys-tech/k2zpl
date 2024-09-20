@@ -18,12 +18,13 @@ internal data class GraphicBox(
     }
 
     override val command: CharSequence = "^GB"
-    override val parameters: LinkedHashMap<CharSequence, Any?> =
-        buildLinkedMap {
-            putAll(
-                mapOf("w" to width, "h" to height, "t" to thickness, "c" to color.code, "r" to rounding)
-            )
-        }
+    override val parameters: Map<CharSequence, Any?> =
+        linkedMapOf(
+            "w" to width,
+            "h" to height,
+            "t" to thickness, "c" to color.code,
+            "r" to rounding
+        )
 }
 
 /**
@@ -41,13 +42,15 @@ fun ZplBuilder.graphicBox(
     color: ZplLineColor = ZplLineColor.BLACK,
     rounding: Int = 0
 ) {
-    command(GraphicBox(
-        width = width,
-        height = height,
-        thickness = thickness,
-        color = color,
-        rounding = rounding
-    ))
+    command(
+        GraphicBox(
+            width = width,
+            height = height,
+            thickness = thickness,
+            color = color,
+            rounding = rounding
+        )
+    )
 }
 
 /**

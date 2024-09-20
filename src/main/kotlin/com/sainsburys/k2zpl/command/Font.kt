@@ -17,7 +17,7 @@ internal data class Font(
     }
 
     override val command: CharSequence = "^A${font}"
-    override val parameters: LinkedHashMap<CharSequence, Any?> =
+    override val parameters: Map<CharSequence, Any?> =
         linkedMapOf("o" to orientation, "h" to height, "w" to width)
 }
 
