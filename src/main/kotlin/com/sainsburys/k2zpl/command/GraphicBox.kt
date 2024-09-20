@@ -9,7 +9,14 @@ internal data class GraphicBox(
     val thickness: Int = 1,
     val color: ZplLineColor = ZplLineColor.BLACK,
     val rounding: Int = 0
-) : ZplCommand {
+) : ZplCommand(
+    parameters = listOf(
+        "w" to width,
+        "h" to height,
+        "t" to thickness, "c" to color.code,
+        "r" to rounding
+    )
+) {
     init {
         require(width in 1..32000) { "Width must be between 1 and 32000" }
         require(height in 1..32000) { "Height must be between 1 and 32000" }
@@ -18,13 +25,6 @@ internal data class GraphicBox(
     }
 
     override val command: CharSequence = "^GB"
-    override val parameters: Map<CharSequence, Any?> =
-        addParameters(
-            "w" to width,
-            "h" to height,
-            "t" to thickness, "c" to color.code,
-            "r" to rounding
-        )
 }
 
 /**

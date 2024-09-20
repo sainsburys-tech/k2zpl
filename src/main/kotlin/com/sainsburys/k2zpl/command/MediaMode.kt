@@ -8,10 +8,10 @@ import com.sainsburys.k2zpl.command.options.ZplYesNo
 internal data class MediaMode(
     val mediaMode: ZplMediaMode,
     val prePeelSelect: ZplYesNo
-) : ZplCommand {
+) : ZplCommand(
+    parameters = listOf("m" to mediaMode, "p" to prePeelSelect)
+) {
     override val command: CharSequence = "^MM"
-    override val parameters: Map<CharSequence, Any?> =
-        addParameters("m" to mediaMode, "p" to prePeelSelect)
 }
 
 /**

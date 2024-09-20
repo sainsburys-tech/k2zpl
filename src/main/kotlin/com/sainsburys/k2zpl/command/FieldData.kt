@@ -2,9 +2,11 @@ package com.sainsburys.k2zpl.command
 
 import com.sainsburys.k2zpl.builder.ZplBuilder
 
-internal data class FieldData(val data: String) : ZplCommand {
+internal data class FieldData(val data: String) : ZplCommand(
+    parameters = listOf("d" to data)
+) {
+
     override val command: CharSequence = "^FD"
-    override val parameters: Map<CharSequence, Any?> = addParameters("d" to data)
 
     override fun build(stringBuilder: StringBuilder): StringBuilder {
         return stringBuilder

@@ -9,7 +9,15 @@ internal data class GraphicField(
     val totalBytes: Int,
     val rowBytes: Int,
     val data: String
-) : ZplCommand {
+) : ZplCommand(
+    parameters = listOf(
+        "f" to format,
+        "db" to dataBytes,
+        "tb" to totalBytes,
+        "rb" to rowBytes,
+        "d" to data
+    )
+) {
     init {
         require(dataBytes in 1..999999) { "Data bytes must be between 1 and 999999" }
         require(totalBytes in 1..999999) { "Total bytes must be between 1 and 999999" }
@@ -17,13 +25,6 @@ internal data class GraphicField(
     }
 
     override val command: CharSequence = "^GF"
-    override val parameters: Map<CharSequence, Any?> = addParameters(
-        "f" to format,
-        "db" to dataBytes,
-        "tb" to totalBytes,
-        "rb" to rowBytes,
-        "d" to data
-    )
 }
 
 /**

@@ -2,9 +2,10 @@ package com.sainsburys.k2zpl.command
 
 import com.sainsburys.k2zpl.builder.ZplBuilder
 
-internal data class LabelHome(val x: Int, val y: Int) : ZplCommand {
+internal data class LabelHome(val x: Int, val y: Int) : ZplCommand(
+    parameters = listOf("x" to x, "y" to y)
+) {
     override val command: CharSequence = "^LH"
-    override val parameters: Map<CharSequence, Any?> = addParameters("x" to x, "y" to y)
 }
 
 /**

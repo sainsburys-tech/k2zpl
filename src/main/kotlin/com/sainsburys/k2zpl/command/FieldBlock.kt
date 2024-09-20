@@ -9,7 +9,15 @@ internal data class FieldBlock(
     val lineSpacing: Int,
     val alignment: ZplTextAlignment,
     val hangingIndent: Int
-) : ZplCommand {
+) : ZplCommand(
+    parameters = listOf(
+        "w" to width,
+        "l" to maxLines,
+        "s" to lineSpacing,
+        "a" to alignment.code,
+        "h" to hangingIndent
+    )
+) {
     init {
         require(width in 1..32000) { "Width must be between 1 and 32000" }
         require(maxLines in 1..9999) { "Lines must be between 1 and 9999" }
@@ -18,13 +26,6 @@ internal data class FieldBlock(
     }
 
     override val command: CharSequence = "^FB"
-    override val parameters: Map<CharSequence, Any?> = addParameters(
-        "w" to width,
-        "l" to maxLines,
-        "s" to lineSpacing,
-        "a" to alignment.code,
-        "h" to hangingIndent
-    )
 }
 
 /**

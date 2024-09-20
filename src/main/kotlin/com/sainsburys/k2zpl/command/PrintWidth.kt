@@ -2,13 +2,14 @@ package com.sainsburys.k2zpl.command
 
 import com.sainsburys.k2zpl.builder.ZplBuilder
 
-internal data class PrintWidth(val width: Int) : ZplCommand {
+internal data class PrintWidth(val width: Int) : ZplCommand(
+    parameters = listOf("w" to width)
+) {
     init {
         require(width in 2 .. 32000) { "Width must be greater than 2. Value is also capped at width of the actual label." }
     }
 
     override val command: CharSequence = "^PW"
-    override val parameters: Map<CharSequence, Any?> = addParameters("w" to width)
 }
 
 

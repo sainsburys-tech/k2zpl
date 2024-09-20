@@ -27,37 +27,39 @@ class ZplCommandTest : DescribeSpec({
     }
 })
 
-class ZplCommandWithoutParameters : ZplCommand {
+class ZplCommandWithoutParameters : ZplCommand() {
     override val command = "^ZC"
 }
 
-class ZplCommandWithOneParameter : ZplCommand {
+class ZplCommandWithOneParameter : ZplCommand(
+    parameters = listOf("param-one" to "value-one")
+) {
     override val command = "^ZCP"
-    override val parameters: Map<CharSequence, Any?> = addParameters(
-        "param-one" to "value-one"
-    )
 }
 
-class ZplCommandWithMultipleParameters : ZplCommand {
-    override val command = "^ZCPS"
-    override val parameters: Map<CharSequence, Any?> = addParameters(
+class ZplCommandWithMultipleParameters : ZplCommand(
+    parameters = listOf(
         "param-one" to "value-one",
         "param-two" to "value-two"
     )
+) {
+    override val command = "^ZCPS"
 }
 
-class ZplCommandWitNullFirstParameter : ZplCommand {
-    override val command = "^ZCPN"
-    override val parameters: Map<CharSequence, Any?> = addParameters(
+class ZplCommandWitNullFirstParameter : ZplCommand(
+    parameters = listOf(
         "param-one" to null,
         "param-two" to "value-two"
     )
+) {
+    override val command = "^ZCPN"
 }
 
-class ZplCommandWitNullSecondParameter : ZplCommand {
-    override val command = "^ZCPNS"
-    override val parameters: Map<CharSequence, Any?> = addParameters(
+class ZplCommandWitNullSecondParameter : ZplCommand(
+    parameters = listOf(
         "param-one" to "value-one",
         "param-two" to null
     )
+) {
+    override val command = "^ZCPNS"
 }

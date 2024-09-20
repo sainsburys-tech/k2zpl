@@ -2,13 +2,14 @@ package com.sainsburys.k2zpl.command
 
 import com.sainsburys.k2zpl.builder.ZplBuilder
 
-internal data class LabelLength(val length: Int) : ZplCommand {
+internal data class LabelLength(val length: Int) : ZplCommand(
+    parameters = listOf("l" to length)
+) {
     init {
         require(length in 1..32000) { "Length must be between 1 and 32000" }
     }
 
     override val command: CharSequence = "^LL"
-    override val parameters: Map<CharSequence, Any?> = addParameters("l" to length)
 }
 
 /**
