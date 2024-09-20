@@ -4,7 +4,7 @@ import com.sainsburys.k2zpl.builder.ZplBuilder
 
 internal data class LabelHome(val x: Int, val y: Int) : ZplCommand {
     override val command: CharSequence = "^LH"
-    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf("x" to x, "y" to y)
+    override val parameters: Map<CharSequence, Any?> = addParameters("x" to x, "y" to y)
 }
 
 /**

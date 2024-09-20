@@ -23,5 +23,23 @@ class FieldDataTest : DescribeSpec({
             }
             result shouldBe "^FDsome-other-data\n"
         }
+        it("outputs correct command using raw string") {
+            val result = k2zpl {
+                val data =
+                    """
+                    some data
+                    with line breaks
+                
+                """.trimIndent()
+                fieldData(data = data)
+            }
+            result shouldBe "^FDsome data\\&with line breaks\\&\n"
+        }
+        it("outputs correct command using string") {
+            val result = k2zpl {
+                fieldData(data = "some data\nwith line breaks\n")
+            }
+            result shouldBe "^FDsome data\\&with line breaks\\&\n"
+        }
     }
 })

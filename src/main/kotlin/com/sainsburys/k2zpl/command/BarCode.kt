@@ -20,7 +20,7 @@ internal data class BarCode(
     }
 
     override val command: CharSequence = "^B1"
-    override val parameters: LinkedHashMap<CharSequence, Any?> = linkedMapOf(
+    override val parameters: Map<CharSequence, Any?> = addParameters(
         "o" to orientation.code,
         "c" to checkDigit.toString(),
         "h" to height,

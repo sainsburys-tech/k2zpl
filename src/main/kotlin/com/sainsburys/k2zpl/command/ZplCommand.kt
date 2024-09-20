@@ -2,7 +2,7 @@ package com.sainsburys.k2zpl.command
 
 interface ZplCommand {
     val command: CharSequence
-    val parameters: LinkedHashMap<CharSequence, Any?> get() = linkedMapOf()
+    val parameters: Map<CharSequence, Any?> get() = addParameters()
     fun build(stringBuilder: StringBuilder) = stringBuilder.apply {
         append(command)
         with(parameters.values.iterator()) {
@@ -25,5 +25,8 @@ private fun <T> Iterator<T>.nextNotNull(block: (T) -> Unit) {
     next()?.let { block(it) }
 }
 
-internal fun <K, V> buildLinkedMap(block: LinkedHashMap<K, V>.() -> Unit) =
-    linkedMapOf<K, V>().apply(block)
+/**
+ * A shortcut to adding parameters that helps to enforce use of [LinkedHashMap]
+ * so that entry order is preserved.
+ */
+internal fun <K, V> ZplCommand.addParameters(vararg pairs: Pair<K, V>) = linkedMapOf(*pairs)
