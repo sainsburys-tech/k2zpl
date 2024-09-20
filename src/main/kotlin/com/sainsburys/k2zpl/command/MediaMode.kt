@@ -11,7 +11,7 @@ internal data class MediaMode(
 ) : ZplCommand {
     override val command: CharSequence = "^MM"
     override val parameters: Map<CharSequence, Any?> =
-        linkedMapOf("m" to mediaMode, "p" to prePeelSelect)
+        addParameters("m" to mediaMode, "p" to prePeelSelect)
 }
 
 /**

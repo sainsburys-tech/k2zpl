@@ -19,7 +19,7 @@ internal data class GraphicBox(
 
     override val command: CharSequence = "^GB"
     override val parameters: Map<CharSequence, Any?> =
-        linkedMapOf(
+        addParameters(
             "w" to width,
             "h" to height,
             "t" to thickness, "c" to color.code,

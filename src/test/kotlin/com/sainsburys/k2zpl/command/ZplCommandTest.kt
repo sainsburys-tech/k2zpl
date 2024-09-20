@@ -33,14 +33,14 @@ class ZplCommandWithoutParameters : ZplCommand {
 
 class ZplCommandWithOneParameter : ZplCommand {
     override val command = "^ZCP"
-    override val parameters: Map<CharSequence, Any?> = linkedMapOf(
+    override val parameters: Map<CharSequence, Any?> = addParameters(
         "param-one" to "value-one"
     )
 }
 
 class ZplCommandWithMultipleParameters : ZplCommand {
     override val command = "^ZCPS"
-    override val parameters: Map<CharSequence, Any?> = linkedMapOf(
+    override val parameters: Map<CharSequence, Any?> = addParameters(
         "param-one" to "value-one",
         "param-two" to "value-two"
     )
@@ -48,7 +48,7 @@ class ZplCommandWithMultipleParameters : ZplCommand {
 
 class ZplCommandWitNullFirstParameter : ZplCommand {
     override val command = "^ZCPN"
-    override val parameters: Map<CharSequence, Any?> = linkedMapOf(
+    override val parameters: Map<CharSequence, Any?> = addParameters(
         "param-one" to null,
         "param-two" to "value-two"
     )
@@ -56,7 +56,7 @@ class ZplCommandWitNullFirstParameter : ZplCommand {
 
 class ZplCommandWitNullSecondParameter : ZplCommand {
     override val command = "^ZCPNS"
-    override val parameters: Map<CharSequence, Any?> = linkedMapOf(
+    override val parameters: Map<CharSequence, Any?> = addParameters(
         "param-one" to "value-one",
         "param-two" to null
     )
