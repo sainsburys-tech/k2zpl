@@ -18,8 +18,8 @@ internal data class GraphicBox(
     }
 
     override val command: CharSequence = "^GB"
-    override val parameters: Map<CharSequence, Any?> =
-        addParameters(
+    override val parameters: ZplParameters =
+        zplParameters(
             "w" to width,
             "h" to height,
             "t" to thickness, "c" to color.code,

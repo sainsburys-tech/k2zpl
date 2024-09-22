@@ -8,7 +8,7 @@ internal data class PrintWidth(val width: Int) : ZplCommand {
     }
 
     override val command: CharSequence = "^PW"
-    override val parameters: Map<CharSequence, Any?> = addParameters("w" to width)
+    override val parameters: ZplParameters = zplParameters("w" to width)
 }
 
 

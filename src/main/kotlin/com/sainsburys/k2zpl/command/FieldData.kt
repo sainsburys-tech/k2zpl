@@ -4,7 +4,7 @@ import com.sainsburys.k2zpl.builder.ZplBuilder
 
 internal data class FieldData(val data: String) : ZplCommand {
     override val command: CharSequence = "^FD"
-    override val parameters: Map<CharSequence, Any?> = addParameters("d" to data)
+    override val parameters: ZplParameters = zplParameters("d" to data)
 
     override fun build(stringBuilder: StringBuilder): StringBuilder {
         return stringBuilder

@@ -14,7 +14,7 @@ internal data class FieldOrigin(
     }
 
     override val command: CharSequence = "^FO"
-    override val parameters: Map<CharSequence, Any?> = addParameters(
+    override val parameters: ZplParameters = zplParameters(
         "x" to x,
         "y" to y,
         "j" to justification

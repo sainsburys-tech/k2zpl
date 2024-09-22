@@ -17,8 +17,8 @@ internal data class Font(
     }
 
     override val command: CharSequence = "^A${font}"
-    override val parameters: Map<CharSequence, Any?> =
-        addParameters("o" to orientation, "h" to height, "w" to width)
+    override val parameters: ZplParameters =
+        zplParameters("o" to orientation, "h" to height, "w" to width)
 }
 
 

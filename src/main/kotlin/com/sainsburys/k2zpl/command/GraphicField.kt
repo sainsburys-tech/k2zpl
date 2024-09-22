@@ -17,7 +17,7 @@ internal data class GraphicField(
     }
 
     override val command: CharSequence = "^GF"
-    override val parameters: Map<CharSequence, Any?> = addParameters(
+    override val parameters: ZplParameters = zplParameters(
         "f" to format,
         "db" to dataBytes,
         "tb" to totalBytes,
