@@ -5,18 +5,10 @@ interface ZplCommand {
     val parameters: ZplParameters get() = zplParameters()
     fun build(stringBuilder: StringBuilder) = stringBuilder.apply {
         append(command)
-        with(parameters.iterator()) {
-            if (hasNext()) {
-                next().value?.let { append(it.toString()) }
-            }
-            while (hasNext()) {
-                next().value?.let {
-                    if (length > command.length) {
-                        append(',')
-                    }
-                    append(it.toString())
-                }
-            }
-        }
+        parameters
+            .asSequence()
+            .map { parameter -> parameter.value?.toString()?.takeIf { it.isNotBlank() } }
+            .filterNotNull()
+            .joinTo(this, separator = ",")
     }
 }
