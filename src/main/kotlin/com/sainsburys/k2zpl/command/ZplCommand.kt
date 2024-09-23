@@ -5,12 +5,12 @@ interface ZplCommand {
     val parameters: ZplParameters get() = zplParameters()
     fun build(stringBuilder: StringBuilder) = stringBuilder.apply {
         append(command)
-        with(parameters.values.iterator()) {
+        with(parameters.iterator()) {
             if (hasNext()) {
-                nextNotNull { append(it.toString()) }
+                next().value?.let { append(it.toString()) }
             }
             while (hasNext()) {
-                nextNotNull {
+                next().value?.let {
                     if (length > command.length) {
                         append(',')
                     }
@@ -19,8 +19,4 @@ interface ZplCommand {
             }
         }
     }
-}
-
-private fun <T> Iterator<T>.nextNotNull(block: (T) -> Unit) {
-    next()?.let { block(it) }
 }
