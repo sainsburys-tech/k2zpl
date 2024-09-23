@@ -7,8 +7,8 @@ interface ZplCommand {
         append(command)
         parameters
             .asSequence()
-            .map { parameter -> parameter.value?.toString()?.takeIf { it.isNotBlank() } }
-            .filterNotNull()
+            .mapNotNull { it.value?.toString() }
+            .filter(String::isNotBlank)
             .joinTo(this, separator = ",")
     }
 }
