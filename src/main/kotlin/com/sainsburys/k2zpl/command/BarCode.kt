@@ -20,7 +20,7 @@ internal data class BarCode(
     }
 
     override val command: CharSequence = "^B1"
-    override val parameters: Map<CharSequence, Any?> = addParameters(
+    override val parameters: ZplParameters = zplParameters(
         "o" to orientation.code,
         "c" to checkDigit.toString(),
         "h" to height,

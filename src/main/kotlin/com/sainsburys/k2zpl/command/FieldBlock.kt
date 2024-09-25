@@ -18,7 +18,7 @@ internal data class FieldBlock(
     }
 
     override val command: CharSequence = "^FB"
-    override val parameters: Map<CharSequence, Any?> = addParameters(
+    override val parameters: ZplParameters = zplParameters(
         "w" to width,
         "l" to maxLines,
         "s" to lineSpacing,
