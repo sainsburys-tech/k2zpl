@@ -4,4 +4,4 @@
 
 ## Documentation
 
-![The Zebra ZPL programming guide in PDF format](https://www.zebra.com/content/dam/support-dam/en/documentation/unrestricted/guide/software/zpl-zbi2-pg-en.pdf)
+[The Zebra ZPL programming guide in PDF format](https://www.zebra.com/content/dam/support-dam/en/documentation/unrestricted/guide/software/zpl-zbi2-pg-en.pdf)
