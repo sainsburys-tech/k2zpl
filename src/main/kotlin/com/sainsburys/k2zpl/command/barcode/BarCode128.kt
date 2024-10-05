@@ -18,7 +18,7 @@ internal data class BarCode128(
     val lineAbove: ZplYesNo,
     val checkDigit: ZplYesNo,
     val mode: ZplBarCode128Mode
-) : BarCode() {
+) : BarCode {
 
     init {
         require(height in 1..32000) { "Height must be between 1 and 32000" }
@@ -41,19 +41,19 @@ internal data class BarCode128(
  * @param data data encoded in the barcode
  * @param x horizontal position
  * @param y vertical position
- * @param orientation The orientation of the barcode.
- * @param height The height of the barcode.
+ * @param orientation The orientation of the barcode
+ * @param height the height of the barcode
  * @param interpretationLine print interpretation line
  * @param lineAbove print interpretation line above code
- * @param checkDigit UCC check digit
+ * @param checkDigit whether to include a UCC check digit
  * @param mode barcode mode
  */
 fun ZplBuilder.barcode128(
     data: String,
     x: Int,
     y: Int,
-    orientation: ZplFieldOrientation = ZplFieldOrientation.NORMAL,
     height: Int,
+    orientation: ZplFieldOrientation = ZplFieldOrientation.NORMAL,
     interpretationLine: Boolean = false,
     lineAbove: Boolean = false,
     checkDigit: Boolean = false,

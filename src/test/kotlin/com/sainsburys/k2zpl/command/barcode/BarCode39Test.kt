@@ -4,6 +4,7 @@ import com.sainsburys.k2zpl.command.options.ZplFieldOrientation
 import com.sainsburys.k2zpl.command.options.ZplYesNo
 import com.sainsburys.k2zpl.k2zpl
 import com.sainsburys.k2zpl.testBuildString
+import com.sainsburys.k2zpl.toRows
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
@@ -31,7 +32,7 @@ class BarCode39Test : DescribeSpec({
             result shouldBe "^B3N,N,10,N,N"
         }
         it("uses orientation parameter properly") {
-            ZplFieldOrientation.entries.forEach {
+            table(headers("orientation"), ZplFieldOrientation.entries.toRows()).forAll {
                 subject.copy(orientation = it).testBuildString() shouldBe "^B3${it.code},N,10,N,N"
             }
         }
@@ -39,21 +40,21 @@ class BarCode39Test : DescribeSpec({
             subject.copy(height = 100).testBuildString() shouldBe "^B3N,N,100,N,N"
         }
         it("uses checkDigit parameter properly") {
-            ZplYesNo.entries.forEach {
+            table(headers("checkDigit"), ZplYesNo.entries.toRows()).forAll {
                 subject.copy(checkDigit = it).testBuildString() shouldBe "^B3N,${it},10,N,N"
             }
         }
         it("uses line parameter properly") {
-            ZplYesNo.entries.forEach {
+            table(headers("line"), ZplYesNo.entries.toRows()).forAll {
                 subject.copy(line = it).testBuildString() shouldBe "^B3N,N,10,${it},N"
             }
         }
         it("uses lineAbove parameter properly") {
-            ZplYesNo.entries.forEach {
+            table(headers("lineAbove"), ZplYesNo.entries.toRows()).forAll {
                 subject.copy(lineAbove = it).testBuildString() shouldBe "^B3N,N,10,N,${it}"
             }
         }
-        it("requires valid parameters") {
+        it("requires valid height parameters") {
             table(
                 headers("height"),
                 row(32001),

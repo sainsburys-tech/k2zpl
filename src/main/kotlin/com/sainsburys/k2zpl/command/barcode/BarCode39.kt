@@ -16,7 +16,7 @@ internal data class BarCode39(
     val checkDigit: ZplYesNo,
     val line: ZplYesNo,
     val lineAbove: ZplYesNo,
-) : BarCode() {
+) : BarCode {
 
     init {
         require(height in 1..32000) { "Height must be between 1 and 32000" }
@@ -38,9 +38,9 @@ internal data class BarCode39(
  * @param data data encoded in the barcode
  * @param x horizontal position
  * @param y vertical position
- * @param orientation The orientation of the barcode.
- * @param checkDigit Mod-43 check digit
- * @param height The height of the barcode.
+ * @param orientation the orientation of the barcode.
+ * @param checkDigit whether to include a Mod-43 check digit
+ * @param height the height of the barcode.
  * @param interpretationLine print interpretation line
  * @param lineAbove print interpretation line above code
  */
@@ -48,9 +48,9 @@ fun ZplBuilder.barcode39(
     data: String,
     x: Int,
     y: Int,
+    height: Int,
     orientation: ZplFieldOrientation = ZplFieldOrientation.NORMAL,
     checkDigit: Boolean = false,
-    height: Int,
     interpretationLine: Boolean = false,
     lineAbove: Boolean = false
 ) {

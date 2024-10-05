@@ -4,6 +4,7 @@ import com.sainsburys.k2zpl.command.options.ZplFieldOrientation
 import com.sainsburys.k2zpl.command.options.ZplFont
 import com.sainsburys.k2zpl.k2zpl
 import com.sainsburys.k2zpl.testBuildString
+import com.sainsburys.k2zpl.toRows
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
@@ -23,12 +24,12 @@ class FontTest : DescribeSpec({
             font.testBuildString() shouldBe "^AAN,30,20"
         }
         it("correctly uses font parameter") {
-            ZplFont.entries.forEach {
+            table(headers("font"), ZplFont.entries.toRows()).forAll {
                 font.copy(font = it).testBuildString() shouldBe "^A${it}N,30,20"
             }
         }
         it("correctly uses orientation parameter") {
-            ZplFieldOrientation.entries.forEach {
+            table(headers("orientation"), ZplFieldOrientation.entries.toRows()).forAll {
                 font.copy(orientation = it).testBuildString() shouldBe "^AA${it},30,20"
             }
         }

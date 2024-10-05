@@ -4,8 +4,12 @@ import com.sainsburys.k2zpl.command.options.ZplMediaMode
 import com.sainsburys.k2zpl.command.options.ZplYesNo
 import com.sainsburys.k2zpl.k2zpl
 import com.sainsburys.k2zpl.testBuildString
+import com.sainsburys.k2zpl.toRows
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.data.forAll
+import io.kotest.data.headers
+import io.kotest.data.table
 import io.kotest.matchers.shouldBe
 
 class MediaModeTest : DescribeSpec({
@@ -18,12 +22,12 @@ class MediaModeTest : DescribeSpec({
             mediaMode.testBuildString() shouldBe "^MMC,N"
         }
         it("uses mediaMode parameter properly") {
-            ZplMediaMode.entries.forEach {
+            table(headers("mediaMode"), ZplMediaMode.entries.toRows()).forAll {
                 mediaMode.copy(mediaMode = it).testBuildString() shouldBe "^MM${it.value},N"
             }
         }
         it("uses prePeelSelect parameter properly") {
-            ZplYesNo.entries.forEach {
+            table(headers("prePeelSelect"), ZplYesNo.entries.toRows()).forAll {
                 mediaMode.copy(prePeelSelect = it).testBuildString() shouldBe "^MMC,${it}"
             }
         }
