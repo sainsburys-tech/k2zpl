@@ -3,6 +3,7 @@ package com.sainsburys.k2zpl.command
 import com.sainsburys.k2zpl.command.options.ZplJustification
 import com.sainsburys.k2zpl.k2zpl
 import com.sainsburys.k2zpl.testBuildString
+import com.sainsburys.k2zpl.toRows
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
@@ -26,7 +27,7 @@ class FieldOriginTest : DescribeSpec({
             fieldOrigin.testBuildString() shouldBe "^FO10,10,0"
         }
         it("uses alignment parameter correctly") {
-            ZplJustification.entries.forEach {
+            table(headers("justification"), ZplJustification.entries.toRows()).forAll {
                 fieldOrigin.copy(justification = it).testBuildString() shouldBe "^FO10,10,$it"
             }
         }

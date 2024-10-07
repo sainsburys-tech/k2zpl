@@ -1,10 +1,10 @@
-package com.sainsburys.k2zpl.command
+package com.sainsburys.k2zpl.command.barcode
 
-import com.sainsburys.k2zpl.command.options.ZplBarcodeType
 import com.sainsburys.k2zpl.command.options.ZplFieldOrientation
 import com.sainsburys.k2zpl.command.options.ZplYesNo
 import com.sainsburys.k2zpl.k2zpl
 import com.sainsburys.k2zpl.testBuildString
+import com.sainsburys.k2zpl.toRows
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
@@ -14,75 +14,75 @@ import io.kotest.data.row
 import io.kotest.data.table
 import io.kotest.matchers.shouldBe
 
-class BarCodeTest : DescribeSpec({
+class BarCode39Test : DescribeSpec({
 
     isolationMode = IsolationMode.InstancePerLeaf
 
-    val barCode = BarCode(
-        type = ZplBarcodeType.CODE_39,
+    val subject = BarCode39(
         orientation = ZplFieldOrientation.NORMAL,
         checkDigit = ZplYesNo.NO,
         height = 10,
-        line = 7,
-        lineAbove = ZplYesNo.YES
+        line = ZplYesNo.NO,
+        lineAbove = ZplYesNo.NO
     )
 
-    describe("Barcode") {
+    describe("Barcode39") {
         it("outputs correct command") {
-            val result = barCode.testBuildString()
-            result shouldBe "^B1N,N,10,7,Y"
+            val result = subject.testBuildString()
+            result shouldBe "^B3N,N,10,N,N"
         }
         it("uses orientation parameter properly") {
-            ZplFieldOrientation.entries.forEach {
-                barCode.copy(orientation = it).testBuildString() shouldBe "^B1${it.code},N,10,7,Y"
+            table(headers("orientation"), ZplFieldOrientation.entries.toRows()).forAll {
+                subject.copy(orientation = it).testBuildString() shouldBe "^B3${it.code},N,10,N,N"
             }
         }
+        it("uses height parameter properly") {
+            subject.copy(height = 100).testBuildString() shouldBe "^B3N,N,100,N,N"
+        }
         it("uses checkDigit parameter properly") {
-            ZplYesNo.entries.forEach {
-                barCode.copy(checkDigit = it).testBuildString() shouldBe "^B1N,${it},10,7,Y"
+            table(headers("checkDigit"), ZplYesNo.entries.toRows()).forAll {
+                subject.copy(checkDigit = it).testBuildString() shouldBe "^B3N,${it},10,N,N"
+            }
+        }
+        it("uses line parameter properly") {
+            table(headers("line"), ZplYesNo.entries.toRows()).forAll {
+                subject.copy(line = it).testBuildString() shouldBe "^B3N,N,10,${it},N"
             }
         }
         it("uses lineAbove parameter properly") {
-            ZplYesNo.entries.forEach {
-                barCode.copy(lineAbove = it).testBuildString() shouldBe "^B1N,N,10,7,${it}"
+            table(headers("lineAbove"), ZplYesNo.entries.toRows()).forAll {
+                subject.copy(lineAbove = it).testBuildString() shouldBe "^B3N,N,10,N,${it}"
             }
         }
-        it("requires valid parameters") {
+        it("requires valid height parameters") {
             table(
-                headers("height", "line"),
-                row(32001, 1),
-                row(0, 1),
-                row(1, 0),
-                row(1, 8)
-            ).forAll { height, line ->
+                headers("height"),
+                row(32001),
+                row(0),
+            ).forAll { height ->
                 shouldThrow<IllegalArgumentException> {
-                    barCode.copy(
-                        height = height,
-                        line = line,
+                    subject.copy(
+                        height = height
                     )
                 }
             }
         }
-
     }
-    describe("barcode extension") {
+    describe("barcode39 extension") {
         it("outputs the correct command") {
             val result = k2zpl {
-                barcode(
+                barcode39(
                     data = "1234567890",
                     x = 10,
                     y = 10,
                     height = 10,
-                    lineThickness = 7,
-                    barcodeType = ZplBarcodeType.CODE_39,
-                    orientation = ZplFieldOrientation.NORMAL,
                     checkDigit = false,
                     lineAbove = true
                 )
             }
             result shouldBe """
                 ^FO10,10,0
-                ^B1N,N,10,7,Y
+                ^B3N,N,10,N,Y
                 ^FD1234567890
                 ^FS
                 
@@ -90,11 +90,11 @@ class BarCodeTest : DescribeSpec({
         }
         it("uses default values") {
             val result = k2zpl {
-                barcode(data = "1234567890", x = 10, y = 10, height = 10, lineThickness = 7)
+                barcode39(data = "1234567890", x = 10, y = 10, height = 10, interpretationLine = true)
             }
             result shouldBe """
                 ^FO10,10,0
-                ^B1N,N,10,7,N
+                ^B3N,N,10,Y,N
                 ^FD1234567890
                 ^FS
                 

@@ -3,6 +3,7 @@ package com.sainsburys.k2zpl.command
 import com.sainsburys.k2zpl.command.options.ZplTextAlignment
 import com.sainsburys.k2zpl.k2zpl
 import com.sainsburys.k2zpl.testBuildString
+import com.sainsburys.k2zpl.toRows
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
@@ -50,7 +51,7 @@ class FieldBlockTest : DescribeSpec({
             }
         }
         it("uses alignment parameter correctly") {
-            ZplTextAlignment.entries.forEach {
+            table(headers("alignment"), ZplTextAlignment.entries.toRows()).forAll {
                 fieldBlock.copy(alignment = it).testBuildString() shouldBe "^FB10,1,10,$it,0"
             }
         }
