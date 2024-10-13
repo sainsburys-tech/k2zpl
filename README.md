@@ -1,6 +1,7 @@
 # K2ZPL
 
 ![Latest build](https://github.com/itsmattking/k2zpl/actions/workflows/build-test.yaml/badge.svg)
+[![Release](https://jitpack.io/v/sainsburys-tech/k2zpl.svg)](https://jitpack.io/#sainsburys-tech/k2zpl)
 
 ## Documentation
 
