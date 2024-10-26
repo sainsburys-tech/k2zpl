@@ -20,6 +20,13 @@ class ZplBuilder {
     private var _zplDpiSetting: ZplDpiSetting = ZplDpiSetting.Unset
     private var defaultFont: Font = Font(ZplFont.A, ZplFieldOrientation.NORMAL, 30.dots, 30.dots)
 
+    var verticalPosition: Int = 0
+        private set
+
+    fun advancePosition(byAmount: Int) {
+        verticalPosition += byAmount
+    }
+
     var dpiSetting: ZplDpiSetting
         get() {
             if (_zplDpiSetting == ZplDpiSetting.Unset) {

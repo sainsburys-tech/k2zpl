@@ -49,6 +49,18 @@ class ZplBuilderTest : DescribeSpec({
             subject.dpiSetting shouldBe ZplDpiSetting.DPI_203
         }
     }
+    describe("advancePosition") {
+        it("defaults to zero") {
+            subject.verticalPosition shouldBe 0
+        }
+        it("adds value to the vertical position") {
+            subject.advancePosition(100)
+            subject.verticalPosition shouldBe 100
+        }
+        it("adds cm value to the vertical position") {
+            subject.verticalPosition shouldBe 100
+        }
+    }
     describe("Int mm extension") {
         it("throws an appropriate exception when no ZplDpiSetting") {
             shouldThrow<IllegalStateException> {
