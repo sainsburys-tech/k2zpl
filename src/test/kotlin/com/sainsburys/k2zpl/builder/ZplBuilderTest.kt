@@ -58,7 +58,11 @@ class ZplBuilderTest : DescribeSpec({
             subject.verticalPosition shouldBe 100
         }
         it("adds cm value to the vertical position") {
-            subject.verticalPosition shouldBe 100
+            subject.apply {
+                subject.dpiSetting = ZplDpiSetting.DPI_203
+                advancePosition(5.cm)
+                verticalPosition shouldBe 5.cm
+            }
         }
     }
     describe("Int mm extension") {
