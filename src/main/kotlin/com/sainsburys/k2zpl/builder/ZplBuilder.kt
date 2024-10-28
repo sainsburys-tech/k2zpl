@@ -20,6 +20,25 @@ class ZplBuilder {
     private var _zplDpiSetting: ZplDpiSetting = ZplDpiSetting.Unset
     private var defaultFont: Font = Font(ZplFont.A, ZplFieldOrientation.NORMAL, 30.dots, 30.dots)
 
+    /**
+     * The current vertical or Y position of the label. This can be used
+     * as needed to keep track of a label height to be used in combination
+     * with the [com.sainsburys.k2zpl.command.LabelLength] command, as well as
+     * any command that requires a Y position value.
+     */
+    var verticalPosition: Int = 0
+        private set
+
+    /**
+     * Advance the [verticalPosition] value by the amount specified.
+     * Can also be used in combination with the [cm], [mm], [dots] functions
+     * to indicate measurement type.
+     * @param byAmount The amount to increment the [verticalPosition] by.
+     */
+    fun advancePosition(byAmount: Int) {
+        verticalPosition += byAmount
+    }
+
     var dpiSetting: ZplDpiSetting
         get() {
             if (_zplDpiSetting == ZplDpiSetting.Unset) {
