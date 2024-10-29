@@ -27,17 +27,17 @@ class MediaTypeTest : DescribeSpec({
                 subject.copy(type = type).testBuildString() shouldBe "^MT${type}"
             }
         }
-        describe("mediaType extension function") {
-            it("outputs correct command") {
-                table(
-                    headers("media type"),
-                    ZplMediaType.entries.map { row(it) }
-                ).forAll { type ->
-                    val result = k2zpl {
-                        mediaType(type)
-                    }
-                    result shouldBe "^MT${type}\n"
+    }
+    describe("mediaType extension function") {
+        it("outputs correct command") {
+            table(
+                headers("media type"),
+                ZplMediaType.entries.map { row(it) }
+            ).forAll { type ->
+                val result = k2zpl {
+                    mediaType(type)
                 }
+                result shouldBe "^MT${type}\n"
             }
         }
     }
