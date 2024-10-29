@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED")
+
 package com.sainsburys.k2zpl.command.options
 
 enum class ZplMediaType(val value: String) {
